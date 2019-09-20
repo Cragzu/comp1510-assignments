@@ -56,5 +56,7 @@ they will mix into and print it; or print an error message if the input is inval
     red + yellow = orange, red + blue = purple, blue + yellow = green
 
 Computational thinking:
-    
+    Decomposition: First consider all cases when one colour exists, then move on to the other.
+    Pattern matching: Noticing that if red does not exist, the only possible options are yellow and blue. Don't bother
+    repeating code by checking things twice.
 '''
