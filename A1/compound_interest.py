@@ -15,6 +15,8 @@ def main():
     """
 
     print(compound_interest(500, 0.1, 4, 10))
+    print(compound_interest(800, 0.08, 12, 20))
+    print(round(compound_interest(800, 0.08, 12, 20), 2))  # optionally round the float to 2 decimal places (for money)
 
 
 if __name__ == "__main__":
@@ -32,5 +34,6 @@ the account with interest over time.
     t = number of years
 
 Computational thinking:
-   
+   Automation: This is a more complex math problem, so it's faster and easier to have a program do it for us.
+   Data representation: Using ints and floats appropriately to represent monetary, time, and other values
 '''
