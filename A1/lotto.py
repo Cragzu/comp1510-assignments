@@ -18,7 +18,9 @@ def number_generator():
     lotto_numbers = (random.sample(range(1, 49), 6))  # generate 6 unique random ints from 1-49
 
     lotto_numbers.sort()  # sort from lowest to highest
-    return lotto_numbers
+
+    print(lotto_numbers[0], lotto_numbers[1], lotto_numbers[2], lotto_numbers[3],
+          lotto_numbers[4], lotto_numbers[5], sep=", ")  # print as strings in one line
 
 
 def main():
@@ -28,7 +30,7 @@ def main():
     Tests the function in this module.
     """
 
-    print(number_generator())
+    number_generator()
 
 
 if __name__ == "__main__":
