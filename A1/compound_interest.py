@@ -4,6 +4,19 @@ Module containing a function to calculate the amount of money in a bank account 
 
 
 def compound_interest(principal_amount, interest_rate, times_compounded, num_of_years):
+    """
+    Calculate the amount of money in a bank account including interest after a given number of years.
+
+    Use the formula for interest: A = P(1 + (r / n))**(n * t)
+
+    :precondition: all parameters must be the correct types specified below
+    :postcondition: the total amount of money in the bank account after calculations will be returned
+    :param principal_amount: a positive int (the initial amount of money in the account)
+    :param interest_rate: a float between 0 and 1 (the interest rate percentage)
+    :param times_compounded: a positive int (the number of times per year the interest is compounded)
+    :param num_of_years: a positive int (the number of years interest is accrued for)
+    :return: a float representing the final amount of money in the account after the given number of years
+    """
     return principal_amount * (1 + (interest_rate / times_compounded)) ** (times_compounded * num_of_years)
 
 
