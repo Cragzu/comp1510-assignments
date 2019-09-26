@@ -11,8 +11,8 @@ def time_calculator(seconds):
     """
     Convert the param seconds into its equivalent in days, hours, minutes, and seconds.
 
-    Repeatedly divides the given int by consts representing the number of seconds in each time unit. Adds each result
-    to a variable, and prints them all separated by white space.
+    Repeatedly divide the given int by consts representing the number of seconds in each time unit. Add each result
+    to a variable, and print them all separated by white space.
 
     :precondition: seconds must be a positive integer
     :postcondition: prints the equivalent number of days, hours, minutes, and seconds separated by white space

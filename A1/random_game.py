@@ -5,19 +5,42 @@ import random
 
 
 def determine_winner(cpu, user_loss, user_win):
-    if cpu == user_loss:  # paper beats rock
+    """
+    Determine the winner of a rock-paper-scissors game between the user and the CPU based on the given parameters.
+
+    :precondition: all parameters must be the types specified below
+    :postcondition: function will print a string letting the user know whether they won, lost, or tied the game
+    :param cpu: an int between 0 and 2, randomly generated and passed to this function
+    :param user_loss: an int between 0 and 2 representing the choice that would let the CPU win
+    :param user_win: an int between 0 and 2 representing the choice that would let the CPU lose
+    :return: none, uses print statements
+    """
+    if cpu == user_loss:  # cpu beats player
         print("You lost. :(")
-    elif cpu == user_win:
+    elif cpu == user_win:  # player beats cpu
         print("You won!")
     else:
         print("Stalemate.")
 
 
 def rock_paper_scissors():
+    """
+    Play a simple game of rock-paper-scissors with the user.
+
+    Generate a random number between 0 and 2 to represent the CPU's choice and display it to the user. Ask the user
+    for their choice, and clean it. If it was invalid, display an error message.
+
+    Pass parameters into the determine_winner function to find the winner, display it.
+
+    :precondition: user must input either rock, paper, or scissors
+    :postcondition: function will run the game and determine who won, or if there was a draw
+    :return: none, uses print statements
+    """
     cpu_choice = random.randint(0, 2)  # 0 = rock, 1 = paper, 2 = scissors
 
     user_choice = input("Choose rock, paper, or scissors?: ")
-    # todo: clean input with string methods
+    user_choice = user_choice.lower()
+    user_choice = user_choice.strip()
 
     if cpu_choice == 0:
         print("CPU chose rock.")
@@ -33,7 +56,7 @@ def rock_paper_scissors():
     elif user_choice == "scissors":
         determine_winner(cpu_choice, 0, 1)
     else:
-        print("That wasn't a valid input. Choose only rock, paper, or scissors.")
+        print("That wasn't a valid input. Please type only rock, paper, or scissors.")
 
 
 def main():
@@ -59,5 +82,6 @@ message. Otherwise determine who won and return that info.
     paper beats rock beats scissors beats paper
 
 Computational thinking:
-   
+   Decomposition: Broke the function down into helper functions to reduce repetition.
+   Abstraction: Used generated numbers to represent the CPU's choice to keep things simple.
 '''
