@@ -16,6 +16,9 @@ def compound_interest(principal_amount, interest_rate, times_compounded, num_of_
     :param times_compounded: a positive int (the number of times per year the interest is compounded)
     :param num_of_years: a positive int (the number of years interest is accrued for)
     :return: a float representing the final amount of money in the account after the given number of years
+
+    >>> compound_interest(500, 0.1, 4, 10)
+    1342.5319191949816
     """
     return principal_amount * (1 + (interest_rate / times_compounded)) ** (times_compounded * num_of_years)
 

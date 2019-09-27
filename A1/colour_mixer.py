@@ -13,6 +13,11 @@ def red_colour_check(first_check, second_check):
     :param first_check: a string representing the first given colour.
     :param second_check: a string representing the second given colour.
     :return: a string representing the secondary colour made by the two primary colours, or False if there is none.
+
+    >>> red_colour_check(red, yellow)
+    'orange'
+    >>> red_colour_check(a, b)
+    False
     """
     if first_check == "red":
         if second_check == "yellow":
@@ -33,6 +38,11 @@ def yellow_colour_check(first_check, second_check):
     :param first_check: a string representing the first given colour.
     :param second_check: a string representing the second given colour.
     :return: a string containing "green", or False if the inputs were not "yellow" and "blue".
+
+    >>> yellow_colour_check(yellow, blue)
+    'green'
+    >>> yellow_colour_check(a, b)
+    False
     """
     if first_check == "yellow":
         if second_check == "blue":
