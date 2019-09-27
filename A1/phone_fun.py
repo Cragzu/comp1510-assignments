@@ -1,6 +1,7 @@
 """
 Module containing a function to play a rudimentary rock-paper-scissors game.
 """
+import doctest
 
 
 def replace_letter(character):
@@ -10,28 +11,33 @@ def replace_letter(character):
     :precondition: the given character must be of length 1, and capitalized if it is a letter
     :postcondition: function will return an int representative of the given char
     :param character: a string of length 1 (char), either a number or letter
-    :return: a 1-digit int equivalent to the given character in the phone system
+    :return: a 1-digit number string equivalent to the given character in the phone system
+
+    >>> replace_letter("3")
+    '3'
+    >>> replace_letter("G")
+    '4'
     """
-    if character in "0123456789-":  # char is already a number, do nothing
+    if character in "0123456789":  # char is already a number, do nothing
         return character
 
     else:  # replace letter with the appropriate number
         if character in "ABC":
-            return 2
+            return "2"
         elif character in "DEF":
-            return 3
+            return "3"
         elif character in "GHI":
-            return 4
+            return "4"
         elif character in "JKL":
-            return 5
+            return "5"
         elif character in "MNO":
-            return 6
+            return "6"
         elif character in "PQRS":
-            return 7
+            return "7"
         elif character in "TUV":
-            return 8
+            return "8"
         elif character in "WXYZ":
-            return 9
+            return "9"
 
 
 def number_translator():
@@ -46,22 +52,22 @@ def number_translator():
     print(initial_number)
     final_number = ""
 
-    final_number += str(replace_letter(initial_number[0]))  # replace each digit individually without loops
-    final_number += str(replace_letter(initial_number[1]))
-    final_number += str(replace_letter(initial_number[2]))
+    final_number += replace_letter(initial_number[0])  # replace each digit individually without loops
+    final_number += replace_letter(initial_number[1])
+    final_number += replace_letter(initial_number[2])
 
     final_number += "-"  # index 3
 
-    final_number += str(replace_letter(initial_number[4]))
-    final_number += str(replace_letter(initial_number[5]))
-    final_number += str(replace_letter(initial_number[6]))
+    final_number += replace_letter(initial_number[4])
+    final_number += replace_letter(initial_number[5])
+    final_number += replace_letter(initial_number[6])
 
     final_number += "-"  # index 7
 
-    final_number += str(replace_letter(initial_number[8]))
-    final_number += str(replace_letter(initial_number[9]))
-    final_number += str(replace_letter(initial_number[10]))
-    final_number += str(replace_letter(initial_number[11]))
+    final_number += replace_letter(initial_number[8])
+    final_number += replace_letter(initial_number[9])
+    final_number += replace_letter(initial_number[10])
+    final_number += replace_letter(initial_number[11])
 
     return final_number
 
@@ -72,6 +78,8 @@ def main():
 
     Tests the function in this module.
     """
+
+    doctest.testmod()
 
     print(number_translator())
 
