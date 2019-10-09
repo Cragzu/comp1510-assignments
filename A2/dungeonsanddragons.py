@@ -115,9 +115,13 @@ def create_character(name_length):
     for i in ['Strength', 'Dexterity', 'Constitution', 'Intelligence', 'Wisdom', 'Charisma']:
         character[i] = roll_die(3, 6)  # create each dict pair with the statistic name and value
 
+    character['XP'] = 0  # todo: is there a way to insert items in the middle of dicts?
+
     character['Inventory'] = []  # assign empty inventory to new character
-    print(character)
-    # return character
+
+    # todo: the rest of the create character function
+
+    return character
 
 
 def print_character(character):
@@ -132,6 +136,3 @@ def print_character(character):
             print(i)
     else:
         print('You don\'t have any items right now.')
-
-
-create_character(3)
