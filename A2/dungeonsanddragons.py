@@ -30,32 +30,41 @@ def roll_die(number_of_rolls, number_of_sides):
     return total
 
 
-def choose_inventory(inventory, selection):
+def choose_inventory():
     """
-    Select an assortment of items from a given list, create a sorted list containing the given number of selected items.
 
     :precondition: inventory should not be empty, else a warning will be returned
     :precondition: selection should be a positive int between 1 and inventory length, else a warning will be returned
     :postcondition: function will return a list of length selection containing a random sample from inventory
-    :param inventory: a list representing all available items to choose from
-    :param selection: a positive int less than or equal to the length of inventory representing the desired # of items
-    :return: a sorted list containing a selection of items from the original inventory list
+    :return: a list containing a selection of items from the original inventory list
     """
-    if inventory == [] and selection == 0:
-        return []
 
-    elif selection < 0:
-        print("The selection cannot be a negative number!")
-        return []
+    print('Welcome to Yolanda\'s Premium Adventure Shop! For all your dungeon-crawling needs.')
 
-    elif selection >= len(inventory):  # selection is equal or longer than inventory
-        if selection > len(inventory):  # warning message only when selection is longer
-            print("The selection cannot be larger than the available inventory!")
-        return sorted(inventory)
+    shop_items = {1: 'Sword of Sanctimony', 2: 'Potion of Python', 3: 'Daggers of Deception', 4: 'Staff of Serenity',
+                  5: 'Juggling Balls of JavaScript', 6: 'Detonator of Divide-by-Zero', 7: 'Gloves of Genius',
+                  8: 'Map of Misdirection', 9: 'Crossbow of Courage', 10: 'Charm of Chris\' Approval',
+                  11: 'Cloak of Confusion', 12: 'Takashi\'s Donut Box', 13: 'Bottle of Binary',
+                  14: 'Axe of Asking Questions'}
 
-    else:
-        return sorted(random.sample(inventory, selection))
+    print('\nToday there are', len(shop_items), 'shop items available. They are:')
+    for number, item in shop_items.items():  # print all shop items and their keys
+        print(number, '-', item)
 
+    print('\n')
+
+    user_exit = False
+    while not user_exit:
+        purchase = input('What would you like to buy? (enter an item number or -1 to finish): ')
+
+        if purchase not in shop_items.keys():
+            print('That wasn\'t an acceptable input. Please enter a number corresponding to an item or -1 to quit.')
+
+        elif int(purchase) == -1:
+            user_exit = True
+
+        else:
+            print('essssss')
 
 def generate_vowel():
     """
@@ -124,7 +133,7 @@ def create_character(name_length):
     return character
 
 
-def print_character(character):
+def print_character(character):  # todo: needs to be modified to accept character dictionary
     print('Your character is named', character[0])  # print name
 
     for i in range(1, 6):  # print stats
@@ -136,3 +145,19 @@ def print_character(character):
             print(i)
     else:
         print('You don\'t have any items right now.')
+
+
+# todo: combat function (+ attack helper function?)
+
+
+def main():
+    """
+    Drive the program.
+
+    Tests the functions created in this module.
+    """
+    choose_inventory()
+
+
+if __name__ == "__main__":
+    main()
