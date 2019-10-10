@@ -59,17 +59,15 @@ def choose_inventory():
     while not user_exit:
         purchase = input('What would you like to buy? (enter an item number or -1 to finish): ')
 
-        print("shop keys:", shop_items.keys())
+        if purchase.isdigit() and int(purchase) in shop_items.keys():  # check if input is a positive number
+            purchase_list.append(shop_items[int(purchase)])
+            print(purchase_list)
 
-        if not purchase.isdigit() or int(purchase) not in shop_items.keys():  # todo: doesn't work with -1
-            print('That wasn\'t an acceptable input. Please enter a number corresponding to an item or -1 to quit.')
-
-        elif int(purchase) == -1:
+        elif purchase == '-1':
             user_exit = True
 
         else:
-            purchase_list.append(shop_items[int(purchase)])
-            print(purchase_list)
+            print('That wasn\'t an acceptable input. Please enter a number corresponding to an item or -1 to quit.')
 
 
 def generate_vowel():
