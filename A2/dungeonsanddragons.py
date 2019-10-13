@@ -114,6 +114,28 @@ def generate_name(syllables):
     return name.capitalize()
 
 
+def select_class():
+    classes = {1: 'barbarian', 2: 'bard', 3: 'cleric', 4: 'druid', 5: 'fighter', 6: 'monk', 7: 'paladin',
+               8: 'ranger', 9: 'rogue', 10: 'sorcerer', 11: 'warlock', 12: 'wizard'}
+
+    print('Which class would you like your character to be? There are', len(classes), 'available:')
+    for number, class_name in classes.items():  # print all shop items and their keys
+        print(number, '-', class_name)
+
+    user_exit = False
+    while not user_exit:
+        class_selection = input('Please enter the number corresponding to your desired class: ')
+
+        if class_selection.isdigit() and int(class_selection) in classes.keys():  # check if input is valid
+            print('Your class is:', classes[int(class_selection)])
+            user_exit = True
+
+        else:
+            print('That wasn\'t an acceptable input. Please enter a number corresponding to a class.')
+
+    return classes[int(class_selection)]
+
+
 def create_character(name_length):
     """
     Create a D&D character as a list with a name and six statistics.
@@ -122,8 +144,7 @@ def create_character(name_length):
     :param name_length: a positive int representing the desired number of syllables in the character name
     :return: a list of length 7 containing a string and 6 nested lists, each containing a string and int
     """
-
-    character = {'Name': generate_name(name_length)}  # begin the dict with the character name
+    character = {'Name': generate_name(name_length), 'Class': select_class()}  # begin the dict with the name and class
 
     for i in ['Strength', 'Dexterity', 'Constitution', 'Intelligence', 'Wisdom', 'Charisma']:
         character[i] = roll_die(3, 6)  # create each dict pair with the statistic name and value
@@ -152,6 +173,8 @@ def print_character(character):  # todo: needs to be modified to accept characte
 
 
 # todo: combat function (+ attack helper function?)
+def combat_round(opponent_one, opponent_two):
+    pass
 
 
 def main():
@@ -160,7 +183,8 @@ def main():
 
     Tests the functions created in this module.
     """
-    choose_inventory()
+    print(create_character(3))
+    #choose_inventory()
 
 
 if __name__ == "__main__":
