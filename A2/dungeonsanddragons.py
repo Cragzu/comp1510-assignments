@@ -119,7 +119,7 @@ def select_class():
                8: 'ranger', 9: 'rogue', 10: 'sorcerer', 11: 'warlock', 12: 'wizard'}
 
     print('Which class would you like your character to be? There are', len(classes), 'available:')
-    for number, class_name in classes.items():  # print all shop items and their keys
+    for number, class_name in classes.items():  # print all classes and their keys
         print(number, '-', class_name)
 
     user_exit = False
@@ -136,6 +136,28 @@ def select_class():
     return classes[int(class_selection)]
 
 
+def select_race():
+    races = {1: 'dragonborn', 2: 'dwarf', 3: 'elf', 4: 'gnome', 5: 'half-elf', 6: 'halfling', 7: 'half-orc',
+             8: 'human', 9: 'tiefling'}
+
+    print('Which race would you like your character to be? There are', len(races), 'available:')
+    for number, race_name in races.items():  # print all races and their keys
+        print(number, '-', race_name)
+
+    user_exit = False
+    while not user_exit:
+        race_selection = input('Please enter the number corresponding to your desired race: ')
+
+        if race_selection.isdigit() and int(race_selection) in races.keys():  # check if input is valid
+            print('Your race is:', races[int(race_selection)])
+            user_exit = True
+
+        else:
+            print('That wasn\'t an acceptable input. Please enter a number corresponding to a class.')
+
+    return races[int(race_selection)]
+
+
 def create_character(name_length):
     """
     Create a D&D character as a list with a name and six statistics.
@@ -144,7 +166,8 @@ def create_character(name_length):
     :param name_length: a positive int representing the desired number of syllables in the character name
     :return: a list of length 7 containing a string and 6 nested lists, each containing a string and int
     """
-    character = {'Name': generate_name(name_length), 'Class': select_class()}  # begin the dict with the name and class
+    # begin the dict with the name, race, and class as chosen by the user
+    character = {'Name': generate_name(name_length), 'Race': select_race(), 'Class': select_class()}
 
     for i in ['Strength', 'Dexterity', 'Constitution', 'Intelligence', 'Wisdom', 'Charisma']:
         character[i] = roll_die(3, 6)  # create each dict pair with the statistic name and value
