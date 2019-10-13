@@ -114,48 +114,44 @@ def generate_name(syllables):
     return name.capitalize()
 
 
-def select_class():
-    classes = {1: 'barbarian', 2: 'bard', 3: 'cleric', 4: 'druid', 5: 'fighter', 6: 'monk', 7: 'paladin',
-               8: 'ranger', 9: 'rogue', 10: 'sorcerer', 11: 'warlock', 12: 'wizard'}
+def selection_helper(selection_category, choices):
+    """
+    Get a user's choice from a dictionary of items within a certain category.
 
-    print('Which class would you like your character to be? There are', len(classes), 'available:')
-    for number, class_name in classes.items():  # print all classes and their keys
-        print(number, '-', class_name)
+    :param selection_category: the category we are selecting from, e.g. race, as a string
+    :param choices: a dict containing all the available choices in the selection_category
+    :return:
+    """
+    print('Which', selection_category, 'would you like your character to be? There are', len(choices), 'available:')
+    for number, item in choices.items():  # print all choices and their keys
+        print(number, '-', item)
 
     user_exit = False
     while not user_exit:
-        class_selection = input('Please enter the number corresponding to your desired class: ')
+        selection = input('Please enter the number corresponding to your desired class: ')
 
-        if class_selection.isdigit() and int(class_selection) in classes.keys():  # check if input is valid
-            print('Your class is:', classes[int(class_selection)])
+        if selection.isdigit() and int(selection) in choices.keys():  # check if input is valid
+            print('Your', selection_category, 'is:', choices[int(selection)])
             user_exit = True
 
         else:
             print('That wasn\'t an acceptable input. Please enter a number corresponding to a class.')
 
-    return classes[int(class_selection)]
+    return choices[int(selection)]
+
+
+def select_class():
+    classes = {1: 'barbarian', 2: 'bard', 3: 'cleric', 4: 'druid', 5: 'fighter', 6: 'monk', 7: 'paladin',
+               8: 'ranger', 9: 'rogue', 10: 'sorcerer', 11: 'warlock', 12: 'wizard'}
+
+    return selection_helper('class', classes)
 
 
 def select_race():
     races = {1: 'dragonborn', 2: 'dwarf', 3: 'elf', 4: 'gnome', 5: 'half-elf', 6: 'halfling', 7: 'half-orc',
              8: 'human', 9: 'tiefling'}
 
-    print('Which race would you like your character to be? There are', len(races), 'available:')
-    for number, race_name in races.items():  # print all races and their keys
-        print(number, '-', race_name)
-
-    user_exit = False
-    while not user_exit:
-        race_selection = input('Please enter the number corresponding to your desired race: ')
-
-        if race_selection.isdigit() and int(race_selection) in races.keys():  # check if input is valid
-            print('Your race is:', races[int(race_selection)])
-            user_exit = True
-
-        else:
-            print('That wasn\'t an acceptable input. Please enter a number corresponding to a class.')
-
-    return races[int(race_selection)]
+    return selection_helper('race', races)
 
 
 def create_character(name_length):
