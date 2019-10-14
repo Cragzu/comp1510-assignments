@@ -30,11 +30,34 @@ def roll_die(number_of_rolls, number_of_sides):
     return total
 
 
-def choose_inventory():  # todo: finish this function + docstring
+def hit_die(character_class):  # todo: docstring
     """
+    Roll a certain die depending on the class of the character.
+
+    :param character_class: a string containing the character's class
+    :return: an int representing the rolled value
+    """
+    if character_class in ['bard', 'cleric', 'druid', 'monk', 'rogue', 'warlock']:
+        roll = roll_die(1, 8)
+
+    elif character_class in ['fighter', 'paladin', 'ranger']:
+        roll = roll_die(1, 10)
+
+    elif character_class in ['sorcerer', 'wizard']:
+        roll = roll_die(1, 6)
+
+    else:  # only barbarian rolls d12
+        roll = roll_die(1, 12)
+        
+    return roll    
+
+
+def choose_inventory():  # todo: docstring
+    """
+    Prompt the user to select items to purchase
 
     :precondition: inventory should not be empty, else a warning will be returned
-    :postcondition: function will return a list of length selection containing a random sample from inventory
+    :postcondition: function will return a list containing the chosen items from inventory
     :return: a list containing a selection of items from the original inventory list
     """
 
@@ -173,28 +196,16 @@ def select_race():
 
 def create_character(name_length):
     """
-    Create a D&D character as a list with a name and six statistics.
+    Create a D&D character as a dictionary with a name and statistics.
 
     :precondition: name_length must be a positive int
     :param name_length: a positive int representing the desired number of syllables in the character name
-    :return: a list of length 7 containing a string and 6 nested lists, each containing a string and int
+    :return: a dictionary containing the character's name, race, class, HP, stats, XP, and inventory
     """
     # begin the dict with the name, race, and class as chosen by the user
     character = {'Name': generate_name(name_length), 'Race': select_race(), 'Class': select_class()}
 
-    # roll for initial HP depending on class
-    if character['Class'] in ['bard', 'cleric', 'druid', 'monk', 'rogue', 'warlock']:
-        hp = roll_die(1, 8)
-
-    elif character['Class'] in ['fighter', 'paladin', 'ranger']:
-        hp = roll_die(1, 10)
-
-    elif character['Class'] in ['sorcerer', 'wizard']:
-        hp = roll_die(1, 6)
-
-    else:  # only barbarian rolls d12
-        hp = roll_die(1, 12)
-
+    hp = hit_die(character['Class'])  # roll for initial HP depending on class
     character['HP'] = [hp, hp]
 
     for i in ['Strength', 'Dexterity', 'Constitution', 'Intelligence', 'Wisdom', 'Charisma']:
@@ -221,19 +232,35 @@ def print_character(character):  # todo: needs to be modified to accept characte
         print('You don\'t have any items right now.')
 
 
-# todo: combat function (+ attack helper function?)
+def attack(attacker, defender):
+    pass
+
+
+# todo: combat function (+ attack helper function?) + docstring
 def combat_round(opponent_one, opponent_two):
     pass
+
+    # equal_rolls = True
+    # while equal_rolls:  # determine start player
+    #     opponent_one_roll = roll_die(1, 20)
+    #     print('1 rolled:', opponent_one_roll)
+    #
+    #     opponent_two_roll = roll_die(1, 20)
+    #     print('2 rolled:', opponent_two_roll)
+    #
+    #     if opponent_one_roll > opponent_two_roll:
+    #         # call attack function
 
 
 def main():
     """
     Drive the program.
 
-    Tests the functions created in this module.
+    Showcases the functions created in this module.
     """
     print(create_character(3))
     #choose_inventory()
+    #combat_round(create_character(3), create_character(2))
 
 
 if __name__ == "__main__":
