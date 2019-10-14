@@ -30,11 +30,10 @@ def roll_die(number_of_rolls, number_of_sides):
     return total
 
 
-def choose_inventory():
+def choose_inventory():  # todo: finish this function + docstring
     """
 
     :precondition: inventory should not be empty, else a warning will be returned
-    :precondition: selection should be a positive int between 1 and inventory length, else a warning will be returned
     :postcondition: function will return a list of length selection containing a random sample from inventory
     :return: a list containing a selection of items from the original inventory list
     """
@@ -118,16 +117,20 @@ def selection_helper(selection_category, choices):
     """
     Get a user's choice from a dictionary of items within a certain category.
 
+    Print out all the available choices in a user-friendly way, then prompt the user to choose one. If the user enters
+    a number corresponding to a valid choice, print a confirmation and return the choice. Otherwise, print a helpful
+    error message. Repeat until the input is valid.
+
     :param selection_category: the category we are selecting from, e.g. race, as a string
     :param choices: a dict containing all the available choices in the selection_category
-    :return:
+    :return: a string corresponding to the user's selection from the choices
     """
     print('Which', selection_category, 'would you like your character to be? There are', len(choices), 'available:')
     for number, item in choices.items():  # print all choices and their keys
         print(number, '-', item)
 
     user_exit = False
-    while not user_exit:
+    while not user_exit:  # repeat until input is valid
         selection = input('Please enter the number corresponding to your desired class: ')
 
         if selection.isdigit() and int(selection) in choices.keys():  # check if input is valid
@@ -141,6 +144,13 @@ def selection_helper(selection_category, choices):
 
 
 def select_class():
+    """
+    Prompt the user to choose a class for their character from the available classes.
+
+    :precondition: selection_helper must work as expected
+    :postcondition: the function will run until a valid class is chosen, then will return it.
+    :return: a string corresponding to the user's selected class
+    """
     classes = {1: 'barbarian', 2: 'bard', 3: 'cleric', 4: 'druid', 5: 'fighter', 6: 'monk', 7: 'paladin',
                8: 'ranger', 9: 'rogue', 10: 'sorcerer', 11: 'warlock', 12: 'wizard'}
 
@@ -148,6 +158,13 @@ def select_class():
 
 
 def select_race():
+    """
+        Prompt the user to choose a race for their character from the available races.
+
+        :precondition: selection_helper must work as expected
+        :postcondition: the function will run until a valid race is chosen, then will return it.
+        :return: a string corresponding to the user's selected race
+        """
     races = {1: 'dragonborn', 2: 'dwarf', 3: 'elf', 4: 'gnome', 5: 'half-elf', 6: 'halfling', 7: 'half-orc',
              8: 'human', 9: 'tiefling'}
 
@@ -165,14 +182,27 @@ def create_character(name_length):
     # begin the dict with the name, race, and class as chosen by the user
     character = {'Name': generate_name(name_length), 'Race': select_race(), 'Class': select_class()}
 
+    # roll for initial HP depending on class
+    if character['Class'] in ['bard', 'cleric', 'druid', 'monk', 'rogue', 'warlock']:
+        hp = roll_die(1, 8)
+
+    elif character['Class'] in ['fighter', 'paladin', 'ranger']:
+        hp = roll_die(1, 10)
+
+    elif character['Class'] in ['sorcerer', 'wizard']:
+        hp = roll_die(1, 6)
+
+    else:  # only barbarian rolls d12
+        hp = roll_die(1, 12)
+
+    character['HP'] = [hp, hp]
+
     for i in ['Strength', 'Dexterity', 'Constitution', 'Intelligence', 'Wisdom', 'Charisma']:
         character[i] = roll_die(3, 6)  # create each dict pair with the statistic name and value
 
-    character['XP'] = 0  # todo: is there a way to insert items in the middle of dicts?
+    character['XP'] = 0  # assign 0 XP to new character
 
     character['Inventory'] = []  # assign empty inventory to new character
-
-    # todo: the rest of the create character function
 
     return character
 
