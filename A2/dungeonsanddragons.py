@@ -2,6 +2,7 @@
 Module containing functions for creating a D&D character.
 """
 import random
+# todo: unit tests for all functions
 
 
 def roll_die(number_of_rolls, number_of_sides):
@@ -30,26 +31,29 @@ def roll_die(number_of_rolls, number_of_sides):
     return total
 
 
-def hit_die(character_class):  # todo: docstring
+def hit_die(character_class):
     """
-    Roll a certain die depending on the class of the character.
+    Roll a die with a certain number of sides depending on the class of the character.
 
+    For HP and combat purposes, different classes roll different dice. Call the roll_die function with the appropriate
+    number of sides to get a random value within the proper range and return it.
+
+    :precondition: roll_die function must work as expected
+    :precondition: character_class must be a string and must contain one of the 12 D&D classes
     :param character_class: a string containing the character's class
     :return: an int representing the rolled value
     """
     if character_class in ['bard', 'cleric', 'druid', 'monk', 'rogue', 'warlock']:
-        roll = roll_die(1, 8)
+        return roll_die(1, 8)
 
     elif character_class in ['fighter', 'paladin', 'ranger']:
-        roll = roll_die(1, 10)
+        return roll_die(1, 10)
 
     elif character_class in ['sorcerer', 'wizard']:
-        roll = roll_die(1, 6)
+        return roll_die(1, 6)
 
     else:  # only barbarian rolls d12
-        roll = roll_die(1, 12)
-        
-    return roll    
+        return roll_die(1, 12)
 
 
 def choose_inventory():  # todo: docstring
@@ -233,23 +237,58 @@ def print_character(character):  # todo: needs to be modified to accept characte
 
 
 def attack(attacker, defender):
-    pass
+    """
+    Attempt an attack from one character on another.
+
+    Roll a die and check the result against the defender's dexterity to determine whether the attack misses. If the
+    attack hits, roll the attacker's hit die to determine the damage dealt.
+
+    :precondition: hit_die function must work as expected
+    :precondition: attacker and defender must be properly formed character dictionaries
+    :param attacker: a dictionary containing the attacking character
+    :param defender: a dictionary containing the defending character
+    :return: the damage dealt to the defender as an int
+    """
+    dexterity_check = roll_die(1, 20)
+    print('The dexterity check was', dexterity_check)
+    print('Defender dexterity is', defender['Dexterity'])
+    if dexterity_check > defender['Dexterity']:
+        damage = hit_die(attacker['Class'])
+        print('Damage dealt was', damage)
+        return damage
+
+    else:
+        print('The attack missed!')
+        return 0
 
 
 # todo: combat function (+ attack helper function?) + docstring
 def combat_round(opponent_one, opponent_two):
-    pass
 
-    # equal_rolls = True
-    # while equal_rolls:  # determine start player
-    #     opponent_one_roll = roll_die(1, 20)
-    #     print('1 rolled:', opponent_one_roll)
-    #
-    #     opponent_two_roll = roll_die(1, 20)
-    #     print('2 rolled:', opponent_two_roll)
-    #
-    #     if opponent_one_roll > opponent_two_roll:
-    #         # call attack function
+    equal_rolls = True
+    while equal_rolls:  # determine start player
+        opponent_one_roll = roll_die(1, 20)
+        print(opponent_one['Name'], 'rolled:', opponent_one_roll)
+
+        opponent_two_roll = roll_die(1, 20)
+        print(opponent_two['Name'], 'rolled:', opponent_two_roll)
+
+        if opponent_one_roll > opponent_two_roll:
+            equal_rolls = False
+            damage = attack(opponent_one, opponent_two)
+            print(opponent_two['HP'][1])
+            opponent_two['HP'][1] -= damage
+            print(opponent_two['HP'][1])
+
+        elif opponent_two_roll > opponent_one_roll:
+            equal_rolls = False
+            damage = attack(opponent_two, opponent_one)
+            print(opponent_two['HP'][1])
+            opponent_two['HP'][1] -= damage
+            print(opponent_two['HP'][1])
+
+
+
 
 
 def main():
@@ -258,9 +297,9 @@ def main():
 
     Showcases the functions created in this module.
     """
-    print(create_character(3))
+    #print(create_character(3))
     #choose_inventory()
-    #combat_round(create_character(3), create_character(2))
+    combat_round(create_character(3), create_character(2))
 
 
 if __name__ == "__main__":
