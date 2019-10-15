@@ -222,16 +222,26 @@ def create_character(name_length):
     return character
 
 
-def print_character(character):  # todo: needs to be modified to accept character dictionary
-    print('Your character is named', character[0])  # print name
+def print_character(character):
+    """
+    Display information about a D&D character in a way easily readable by the user.
 
-    for i in range(1, 6):  # print stats
-        print('Your', character[i][0], 'is', character[i][1])
+    :param character: a properly formed dictionary containing character information
+    :return: none, uses print statements
+    """
+    print('Your character is named', character['Name'], '\nYour race is', character['Race'],
+          '\nYour class is', character['Class'], '\nYour starting HP is', character['HP'][0])
 
-    if len(character) == 8 and character[7]:  # print items if they exist
+    for i in ['Strength', 'Dexterity', 'Constitution', 'Intelligence', 'Wisdom', 'Charisma']:  # print stats
+        print('Your', i, 'is', character[i])
+
+    print('Your current XP is', character['XP'])
+
+    if character['Inventory']:
         print('You have these items:')
-        for i in character[7]:
+        for i in character['Inventory']:
             print(i)
+
     else:
         print('You don\'t have any items right now.')
 
@@ -275,20 +285,19 @@ def combat_round(opponent_one, opponent_two):
 
         if opponent_one_roll > opponent_two_roll:
             equal_rolls = False
-            damage = attack(opponent_one, opponent_two)
             print(opponent_two['HP'][1])
-            opponent_two['HP'][1] -= damage
+            opponent_two['HP'][1] -= attack(opponent_one, opponent_two)
             print(opponent_two['HP'][1])
+            if opponent_two['HP'][1] > 0:
+                opponent_one['HP'][1] -= attack(opponent_two, opponent_one)
 
         elif opponent_two_roll > opponent_one_roll:
             equal_rolls = False
-            damage = attack(opponent_two, opponent_one)
             print(opponent_two['HP'][1])
-            opponent_two['HP'][1] -= damage
+            opponent_one['HP'][1] -= attack(opponent_two, opponent_one)
             print(opponent_two['HP'][1])
-
-
-
+            if opponent_one['HP'][1] > 0:
+                opponent_two['HP'][1] -= attack(opponent_one, opponent_two)
 
 
 def main():
@@ -297,9 +306,9 @@ def main():
 
     Showcases the functions created in this module.
     """
-    #print(create_character(3))
+    print_character(create_character(3))
     #choose_inventory()
-    combat_round(create_character(3), create_character(2))
+    #combat_round(create_character(3), create_character(2))
 
 
 if __name__ == "__main__":
