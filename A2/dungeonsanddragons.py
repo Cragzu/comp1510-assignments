@@ -58,10 +58,11 @@ def hit_die(character_class):
 
 def choose_inventory():  # todo: docstring
     """
-    Prompt the user to select items to purchase
+    Prompt the user to select items to purchase from a predefined dictionary.
 
-    :precondition: inventory should not be empty, else a warning will be returned
-    :postcondition: function will return a list containing the chosen items from inventory
+    Print all the available items, then run a loop asking the user to select items, exiting when -1 is entered. If
+    the user enters invalid input, print a helpful error message before prompting again.
+
     :return: a list containing a selection of items from the original inventory list
     """
 
@@ -94,6 +95,8 @@ def choose_inventory():  # todo: docstring
 
         else:
             print('That wasn\'t an acceptable input. Please enter a number corresponding to an item or -1 to quit.')
+
+    return purchase_list
 
 
 def generate_vowel():
@@ -272,8 +275,18 @@ def attack(attacker, defender):
         return 0
 
 
-# todo: combat function (+ attack helper function?) + docstring
 def combat_round(opponent_one, opponent_two):
+    """
+    Simulate a round of combat between two characters.
+
+    Roll a d20 for each character to determine who attacks first. If rolls are equal, continue rolling until one is
+    higher. Call the attack function with the attacker and defender and adjust the defender's HP. If the defender
+    survives the attack (HP > 0), call the attack function again with the roles reversed for a counterattack.
+
+    :param opponent_one: a dictionary containing a character
+    :param opponent_two: a dictionary containing a character
+    :return: none, uses print statements
+    """
 
     print('Rolling to determine attack priority...')
     equal_rolls = True
@@ -302,6 +315,9 @@ def combat_round(opponent_one, opponent_two):
             else:
                 print(opponent_one['Name'], 'was defeated!')
 
+        else:
+            print('A tie! Rolling again...')
+
 
 def main():
     """
@@ -309,9 +325,27 @@ def main():
 
     Showcases the functions created in this module.
     """
-    #print_character(create_character(3))
-    #choose_inventory()
-    combat_round(create_character(3), create_character(2))
+    print('~~~ Welcome to the D&D Simulator! ~~~')
+    print('\nPlayer 1, create your character:')
+    player_one = create_character(int(input('How many syllables should your character\'s name have?: ')))
+
+    print('\nSelect', (player_one['Name'] + '\'s inventory:'))
+    player_one['Inventory'] = choose_inventory()
+
+    print('\nHere\'s your character!')
+    print_character(player_one)
+
+    print('\nPlayer 2, create your character:')
+    player_two = create_character(int(input('How many syllables should your character\'s name have?: ')))
+
+    print('\nSelect', (player_two['Name'] + '\'s inventory:'))
+    player_two['Inventory'] = choose_inventory()
+
+    print('\nHere\'s your character!')
+    print_character(player_two)
+
+    print('\nIt\'s time for', player_one['Name'], 'and', player_two['Name'], 'to battle!')
+    combat_round(player_one, player_two)
 
 
 if __name__ == "__main__":
