@@ -1,5 +1,4 @@
 from unittest import TestCase
-from dungeonsanddragons import choose_inventory
 import unittest.mock
 import io
 from dungeonsanddragons import choose_inventory

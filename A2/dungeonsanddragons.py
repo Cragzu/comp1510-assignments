@@ -54,7 +54,7 @@ def hit_die(character_class):
     else:  # only barbarian rolls d12
         return roll_die(1, 12)
 
-# todo: unit test
+
 def choose_inventory():
     """
     Prompt the user to select items to purchase from a predefined dictionary.
@@ -160,14 +160,15 @@ def selection_helper(selection_category, choices):
 
     user_exit = False
     while not user_exit:  # repeat until input is valid
-        selection = input('Please enter the number corresponding to your desired class: ')
+        selection = input('Please enter the number corresponding to your desired ' + selection_category + ':')
 
         if selection.isdigit() and int(selection) in choices.keys():  # check if input is valid
             print('Your', selection_category, 'is:', choices[int(selection)])
             user_exit = True
 
         else:
-            print('That wasn\'t an acceptable input. Please enter a number corresponding to a class.')
+            print('That wasn\'t an acceptable input. Please enter a number corresponding to a',
+                  (selection_category + '.'))
 
     return choices[int(selection)]
 
