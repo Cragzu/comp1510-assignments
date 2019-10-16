@@ -2,6 +2,7 @@
 Module containing functions for creating a D&D character.
 """
 import random
+# todo: doctests if any functions need them?
 
 
 def roll_die(number_of_rolls, number_of_sides):
@@ -186,7 +187,7 @@ def select_class():
 
     return selection_helper('class', classes)
 
-# todo: unit test
+
 def select_race():
     """
         Prompt the user to choose a race for their character from the available races.
