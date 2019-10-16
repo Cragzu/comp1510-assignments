@@ -97,7 +97,7 @@ def choose_inventory():
 
     return purchase_list
 
-# todo: unit test
+
 def generate_vowel():
     """
     Randomly select one vowel and return it.
@@ -106,7 +106,7 @@ def generate_vowel():
     """
     return random.choice('aeiouy')
 
-# todo: unit test
+
 def generate_consonant():
     """
     Randomly select one consonant and return it.
@@ -115,7 +115,7 @@ def generate_consonant():
     """
     return random.choice('bcdfghjklmnpqrstvwxyz')
 
-# todo: unit test
+
 def generate_syllable():
     """
     Create a syllable using one consonant and one vowel. Use the generate consonant and vowel functions.
