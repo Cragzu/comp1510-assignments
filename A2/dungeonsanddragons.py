@@ -264,7 +264,7 @@ def attack(attacker, defender):
     print('Defender dexterity is', defender['Dexterity'])
     if dexterity_check > defender['Dexterity']:
         damage = hit_die(attacker['Class'])
-        print('Damage dealt was', damage)
+        print(attacker['Name'], 'dealt', damage, 'damage to', (defender['Name'] + '!'))
         return damage
 
     else:
@@ -275,6 +275,7 @@ def attack(attacker, defender):
 # todo: combat function (+ attack helper function?) + docstring
 def combat_round(opponent_one, opponent_two):
 
+    print('Rolling to determine attack priority...')
     equal_rolls = True
     while equal_rolls:  # determine start player
         opponent_one_roll = roll_die(1, 20)
@@ -284,20 +285,22 @@ def combat_round(opponent_one, opponent_two):
         print(opponent_two['Name'], 'rolled:', opponent_two_roll)
 
         if opponent_one_roll > opponent_two_roll:
+            print(opponent_one['Name'], 'attacks first!')
             equal_rolls = False
-            print(opponent_two['HP'][1])
             opponent_two['HP'][1] -= attack(opponent_one, opponent_two)
-            print(opponent_two['HP'][1])
             if opponent_two['HP'][1] > 0:
                 opponent_one['HP'][1] -= attack(opponent_two, opponent_one)
+            else:
+                print(opponent_two['Name'], 'was defeated!')
 
         elif opponent_two_roll > opponent_one_roll:
+            print(opponent_two['Name'], 'attacks first!')
             equal_rolls = False
-            print(opponent_two['HP'][1])
             opponent_one['HP'][1] -= attack(opponent_two, opponent_one)
-            print(opponent_two['HP'][1])
             if opponent_one['HP'][1] > 0:
                 opponent_two['HP'][1] -= attack(opponent_one, opponent_two)
+            else:
+                print(opponent_one['Name'], 'was defeated!')
 
 
 def main():
@@ -306,9 +309,9 @@ def main():
 
     Showcases the functions created in this module.
     """
-    print_character(create_character(3))
+    #print_character(create_character(3))
     #choose_inventory()
-    #combat_round(create_character(3), create_character(2))
+    combat_round(create_character(3), create_character(2))
 
 
 if __name__ == "__main__":
