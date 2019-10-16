@@ -141,7 +141,7 @@ def generate_name(syllables):
 
     return name.capitalize()
 
-# todo: unit test
+
 def selection_helper(selection_category, choices):
     """
     Get a user's choice from a dictionary of items within a certain category.
@@ -172,7 +172,7 @@ def selection_helper(selection_category, choices):
 
     return choices[int(selection)]
 
-# todo: unit test
+
 def select_class():
     """
     Prompt the user to choose a class for their character from the available classes.
