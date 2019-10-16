@@ -2,7 +2,6 @@
 Module containing functions for creating a D&D character.
 """
 import random
-# todo: unit tests for all functions
 
 
 def roll_die(number_of_rolls, number_of_sides):
@@ -30,7 +29,7 @@ def roll_die(number_of_rolls, number_of_sides):
 
     return total
 
-
+# todo: unit test
 def hit_die(character_class):
     """
     Roll a die with a certain number of sides depending on the class of the character.
@@ -55,8 +54,8 @@ def hit_die(character_class):
     else:  # only barbarian rolls d12
         return roll_die(1, 12)
 
-
-def choose_inventory():  # todo: docstring
+# todo: unit test
+def choose_inventory():
     """
     Prompt the user to select items to purchase from a predefined dictionary.
 
@@ -98,7 +97,7 @@ def choose_inventory():  # todo: docstring
 
     return purchase_list
 
-
+# todo: unit test
 def generate_vowel():
     """
     Randomly select one vowel and return it.
@@ -107,7 +106,7 @@ def generate_vowel():
     """
     return random.choice('aeiouy')
 
-
+# todo: unit test
 def generate_consonant():
     """
     Randomly select one consonant and return it.
@@ -116,7 +115,7 @@ def generate_consonant():
     """
     return random.choice('bcdfghjklmnpqrstvwxyz')
 
-
+# todo: unit test
 def generate_syllable():
     """
     Create a syllable using one consonant and one vowel. Use the generate consonant and vowel functions.
@@ -125,7 +124,7 @@ def generate_syllable():
     """
     return generate_consonant() + generate_vowel()
 
-
+# todo: unit test
 def generate_name(syllables):
     """
     Create a name using the specified number of syllables. Use the generate syllable function.
@@ -142,7 +141,7 @@ def generate_name(syllables):
 
     return name.capitalize()
 
-
+# todo: unit test
 def selection_helper(selection_category, choices):
     """
     Get a user's choice from a dictionary of items within a certain category.
@@ -172,7 +171,7 @@ def selection_helper(selection_category, choices):
 
     return choices[int(selection)]
 
-
+# todo: unit test
 def select_class():
     """
     Prompt the user to choose a class for their character from the available classes.
@@ -186,7 +185,7 @@ def select_class():
 
     return selection_helper('class', classes)
 
-
+# todo: unit test
 def select_race():
     """
         Prompt the user to choose a race for their character from the available races.
@@ -200,7 +199,7 @@ def select_race():
 
     return selection_helper('race', races)
 
-
+# todo: unit test
 def create_character(name_length):
     """
     Create a D&D character as a dictionary with a name and statistics.
@@ -224,7 +223,7 @@ def create_character(name_length):
 
     return character
 
-
+# todo: unit test
 def print_character(character):
     """
     Display information about a D&D character in a way easily readable by the user.
@@ -248,7 +247,7 @@ def print_character(character):
     else:
         print('You don\'t have any items right now.')
 
-
+# todo: unit test
 def attack(attacker, defender):
     """
     Attempt an attack from one character on another.
@@ -274,7 +273,7 @@ def attack(attacker, defender):
         print('The attack missed!')
         return 0
 
-
+# todo: unit test
 def combat_round(opponent_one, opponent_two):
     """
     Simulate a round of combat between two characters.
