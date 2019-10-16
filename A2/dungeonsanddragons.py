@@ -29,7 +29,7 @@ def roll_die(number_of_rolls, number_of_sides):
 
     return total
 
-# todo: unit test
+
 def hit_die(character_class):
     """
     Roll a die with a certain number of sides depending on the class of the character.
@@ -124,7 +124,7 @@ def generate_syllable():
     """
     return generate_consonant() + generate_vowel()
 
-# todo: unit test
+
 def generate_name(syllables):
     """
     Create a name using the specified number of syllables. Use the generate syllable function.
