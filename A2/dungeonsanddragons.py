@@ -2,7 +2,6 @@
 Module containing functions for creating a D&D character.
 """
 import random
-# todo: doctests if any functions need them?
 
 
 def roll_die(number_of_rolls, number_of_sides):
@@ -135,7 +134,7 @@ def generate_name(syllables):
     :param syllables: a positive int representing the desired number of syllables for the name
     :return: a string of length syllables * 2
     """
-    name = ""
+    name = ''
 
     for i in range(syllables):
         name += generate_syllable()
@@ -275,7 +274,7 @@ def attack(attacker, defender):
         print('The attack missed!')
         return 0
 
-# todo: unit test
+
 def combat_round(opponent_one, opponent_two):
     """
     Simulate a round of combat between two characters.
