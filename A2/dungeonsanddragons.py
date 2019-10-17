@@ -201,7 +201,7 @@ def select_race():
 
     return selection_helper('race', races)
 
-# todo: unit test
+
 def create_character(name_length):
     """
     Create a D&D character as a dictionary with a name and statistics.
