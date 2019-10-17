@@ -225,7 +225,7 @@ def create_character(name_length):
 
     return character
 
-# todo: unit test
+
 def print_character(character):
     """
     Display information about a D&D character in a way easily readable by the user.
