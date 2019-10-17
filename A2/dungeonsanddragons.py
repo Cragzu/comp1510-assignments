@@ -249,7 +249,7 @@ def print_character(character):
     else:
         print('You don\'t have any items right now.')
 
-# todo: unit test
+
 def attack(attacker, defender):
     """
     Attempt an attack from one character on another.
