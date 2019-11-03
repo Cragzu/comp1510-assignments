@@ -2,6 +2,7 @@
 Module containing functions that manage the character/user in the SUD.
 """
 from constants import PLAYER
+from map import valid_movements
 # todo: should contain character description, health, healing
 
 
@@ -45,13 +46,18 @@ def move(current_position):
     print('Current position:', current_position)
     # todo: make this dynamic? how?
 
-    direction = input_loop('Move (N)orth, (S)outh, (E)ast, or (W)est?: ', ['N', 'S', 'E', 'W'])
+    prompt_list = valid_movements(current_position)[0]
+    prompt = 'Which direction to move? You can go: '
+    for i in prompt_list:
+        prompt += (i + ' ')
+
+    direction = input_loop(prompt, valid_movements(current_position)[1])
 
     if direction == 'N':
-        current_position[0] += 1
+        current_position[0] -= 1
 
     elif direction == 'S':
-        current_position[0] -= 1
+        current_position[0] += 1
 
     elif direction == 'E':
         current_position[1] += 1
@@ -69,6 +75,8 @@ def main():
     """
 
     describe_character(PLAYER)
+
+    move([0, 2])
 
 if __name__ == "__main__":
     main()
