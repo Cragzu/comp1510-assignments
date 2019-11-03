@@ -7,37 +7,49 @@ from map import GAME_BOARD
 
 def move(current_position):
     print('Current position:', current_position)
+    # todo: make this dynamic? how?
 
-    direction_options = ['n', 's', 'e', 'w']  # todo: make this dynamic? how?
+    direction = input_loop('Move (N)orth, (S)outh, (E)ast, or (W)est?: ', ['N', 'S', 'E', 'W'])
 
-    input_loop = True
-    while input_loop:
+    if direction == 'n':
+        current_position[0] += 1
 
-        direction = input('Move (N)orth, (S)outh, (E)ast, or (W)est?: ')
+    elif direction == 's':
+        current_position[0] -= 1
 
-        if direction not in direction_options:
-            print('Sorry, that wasn\'t a valid movement. Please try again.')
+    elif direction == 'e':
+        current_position[1] += 1
 
-        else:
-            if direction.lower() == 'n':
-                current_position[0] += 1
-
-            elif direction.lower() == 's':
-                current_position[0] -= 1
-
-            elif direction.lower() == 'e':
-                current_position[1] += 1
-
-            elif direction.lower() == 'w':
-                current_position[1] -= 1
-
-            input_loop = False
+    elif direction == 'w':
+        current_position[1] -= 1
 
     print('New position:', current_position)
     return current_position
 
 def describe_room(current_position):
     pass
+
+
+def input_loop(prompt, valid_choices):
+    """
+    Prompt the user repeatedly for a choice until a valid input is entered.
+    
+    :param prompt: a string describing what the user can choose from
+    :param valid_choices: a list containing chars representing the available choices
+    :precondition: the valid_choices list must contain only length-1 strings of capital letters
+    :return: a char representing the user's choice
+    """
+    valid_input = False
+    while not valid_input:
+        user_choice = input(prompt)
+
+        if user_choice.upper() not in valid_choices:  # check if input is valid
+            print('Sorry, that wasn\'t a valid input. Please try again.')
+
+        else:
+            valid_input = True
+
+    return user_choice
 
 
 def main():
