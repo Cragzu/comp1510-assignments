@@ -2,7 +2,7 @@
 Main module that runs the Single User Dungeon.
 """
 # todo: imports go here
-from map import GAME_BOARD
+from constants import GAME_BOARD
 
 
 def move(current_position):
@@ -11,23 +11,20 @@ def move(current_position):
 
     direction = input_loop('Move (N)orth, (S)outh, (E)ast, or (W)est?: ', ['N', 'S', 'E', 'W'])
 
-    if direction == 'n':
+    if direction == 'N':
         current_position[0] += 1
 
-    elif direction == 's':
+    elif direction == 'S':
         current_position[0] -= 1
 
-    elif direction == 'e':
+    elif direction == 'E':
         current_position[1] += 1
 
-    elif direction == 'w':
+    elif direction == 'W':
         current_position[1] -= 1
 
     print('New position:', current_position)
     return current_position
-
-def describe_room(current_position):
-    pass
 
 
 def input_loop(prompt, valid_choices):
@@ -57,13 +54,8 @@ def main():
     Drive the SUD program.
     """
     pos = move([2, 2])
-    #print(pos, pos[0], pos[1])
 
-    #print(GAME_BOARD[1][2])
-
-    room = GAME_BOARD[pos[0]][pos[1]]
-
-    print(room['description'])
+    describe_room(pos)
 
 
 if __name__ == "__main__":

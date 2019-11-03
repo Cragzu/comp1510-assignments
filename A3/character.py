@@ -1,5 +1,5 @@
 """
-Module containing character functions for SUD.
+Module containing functions that manage the character/user in the SUD.
 """
 from monster import generate_monster, MONSTER_TYPES, MONSTER_DESCRIPTIONS
 

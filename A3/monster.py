@@ -3,10 +3,7 @@ Module containing monster functions for SUD.
 """
 import random
 from sud import input_loop
-
-
-MONSTER_TYPES = ['dragon', 'goblin', 'ghost', 'slime', 'vampire', 'gelatinous cube', 'slaad', 'zombie', 'banshee']
-MONSTER_DESCRIPTIONS = ['horrible', 'dark', 'terrifying', 'deadly', 'pale', 'wicked', 'flying', 'sinister']
+from constants import MONSTER_TYPES, MONSTER_DESCRIPTIONS
 
 
 def generate_monster(types, descriptions):
@@ -105,35 +102,35 @@ def combat_round(player, monster):
     :return: none, uses print statements
     """
 
-    print('Rolling to determine attack priority...')
-    equal_rolls = True
-    while equal_rolls:  # determine start player
-        opponent_one_roll = roll_die(1, 20)
-        print(opponent_one['Name'], 'rolled:', opponent_one_roll)
-
-        opponent_two_roll = roll_die(1, 20)
-        print(opponent_two['Name'], 'rolled:', opponent_two_roll)
-
-        if opponent_one_roll > opponent_two_roll:
-            print(opponent_one['Name'], 'attacks first!')
-            equal_rolls = False
-            opponent_two['HP'][1] -= attack(opponent_one, opponent_two)
-            if opponent_two['HP'][1] > 0:
-                opponent_one['HP'][1] -= attack(opponent_two, opponent_one)
-            else:
-                print(opponent_two['Name'], 'was defeated!')
-
-        elif opponent_two_roll > opponent_one_roll:
-            print(opponent_two['Name'], 'attacks first!')
-            equal_rolls = False
-            opponent_one['HP'][1] -= attack(opponent_two, opponent_one)
-            if opponent_one['HP'][1] > 0:
-                opponent_two['HP'][1] -= attack(opponent_one, opponent_two)
-            else:
-                print(opponent_one['Name'], 'was defeated!')
-
-        else:
-            print('A tie! Rolling again...')
+    # print('Rolling to determine attack priority...')
+    # equal_rolls = True
+    # while equal_rolls:  # determine start player
+    #     opponent_one_roll = roll_die(1, 20)
+    #     print(opponent_one['Name'], 'rolled:', opponent_one_roll)
+    #
+    #     opponent_two_roll = roll_die(1, 20)
+    #     print(opponent_two['Name'], 'rolled:', opponent_two_roll)
+    #
+    #     if opponent_one_roll > opponent_two_roll:
+    #         print(opponent_one['Name'], 'attacks first!')
+    #         equal_rolls = False
+    #         opponent_two['HP'][1] -= attack(opponent_one, opponent_two)
+    #         if opponent_two['HP'][1] > 0:
+    #             opponent_one['HP'][1] -= attack(opponent_two, opponent_one)
+    #         else:
+    #             print(opponent_two['Name'], 'was defeated!')
+    #
+    #     elif opponent_two_roll > opponent_one_roll:
+    #         print(opponent_two['Name'], 'attacks first!')
+    #         equal_rolls = False
+    #         opponent_one['HP'][1] -= attack(opponent_two, opponent_one)
+    #         if opponent_one['HP'][1] > 0:
+    #             opponent_two['HP'][1] -= attack(opponent_one, opponent_two)
+    #         else:
+    #             print(opponent_one['Name'], 'was defeated!')
+    #
+    #     else:
+    #         print('A tie! Rolling again...')
 
 
 def main():
