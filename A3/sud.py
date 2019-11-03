@@ -33,18 +33,25 @@ def move(current_position):
 
             input_loop = False
 
-
     print('New position:', current_position)
+    return current_position
 
-
+def describe_room(current_position):
+    pass
 
 
 def main():
     """
     Drive the SUD program.
     """
-    move([2, 2])
+    pos = move([2, 2])
+    #print(pos, pos[0], pos[1])
 
+    #print(GAME_BOARD[1][2])
+
+    room = GAME_BOARD[pos[0]][pos[1]]
+
+    print(room['description'])
 
 
 if __name__ == "__main__":
