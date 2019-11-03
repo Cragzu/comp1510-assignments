@@ -36,7 +36,24 @@ def monster_encounter(monster):
     """
     print('You encountered a', monster['description'], (monster['name'] + '!'))
 
-    return input_loop('Do you want to (F)ight or (R)un away?: ', ['F', 'R'])
+    fight_decision = input_loop('Do you want to (F)ight or (R)un away?: ', ['F', 'R'])
+
+    if fight_decision == 'R':
+        backstab()
+
+
+def backstab():
+    stab_chance = random.randint(1, 10)
+
+    if stab_chance == 1:  # 10% chance of backstabbing
+        print('The monster stabbed you in the back!')
+        damage = random.randint(1, 4)
+        print('You took', damage, 'damage before escaping.')
+        return damage
+
+    else:
+        print('You got away safely!')
+        return 0
 
 
 def main():

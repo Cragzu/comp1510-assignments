@@ -41,9 +41,9 @@ def input_loop(prompt, valid_choices):
     """
     valid_input = False
     while not valid_input:
-        user_choice = input(prompt)
+        user_choice = (input(prompt)).upper()
 
-        if user_choice.upper() not in valid_choices:  # check if input is valid
+        if user_choice not in valid_choices:  # check if input is valid
             print('Sorry, that wasn\'t a valid input. Please try again.')
 
         else:
