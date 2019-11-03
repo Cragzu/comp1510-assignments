@@ -2,8 +2,8 @@
 Module containing monster functions for SUD.
 """
 import random
-from sud import input_loop
-from constants import MONSTER_TYPES, MONSTER_DESCRIPTIONS
+from constants import GAME_BOARD, MONSTER_TYPES, MONSTER_DESCRIPTIONS
+from character import input_loop
 
 
 def generate_monster(types, descriptions):
@@ -18,6 +18,19 @@ def generate_monster(types, descriptions):
     monster = {'name': random.choice(types), 'description': random.choice(descriptions),
                'HP': 5, 'max_HP': 5, 'hit_die': 6}
     return monster
+
+
+def populate_dungeon(dungeon):
+    """
+    Populate the rooms in the dungeon with monsters.
+
+    :param dungeon: a list containing dungeon rooms
+    precondition: dungeon is a properly formed matrix; a list containing 5 lists with 5 dicts representing 25 rooms
+    :return: none, modifies the given dungeon
+    """
+    for row in dungeon:
+        for room in row:
+            room['monster'] = generate_monster(MONSTER_TYPES, MONSTER_DESCRIPTIONS)
 
 
 def monster_encounter(monster):
@@ -63,6 +76,30 @@ def backstab():
         return 0
 
 
+def modify_hp(entity, value):
+    """
+    Update the HP value of an entity.
+
+    Add the value to the current HP of the entity, capping it at its max HP and at 0.
+
+    :param entity: a dictionary containing a player or monster
+    :param value: an int representing the value to change the HP by, can be positive or negative
+    :precondition: entity must be a properly formed dictionary
+    :return: none, modifies the given entity and prints information
+    """
+    hp_before = entity['HP']
+
+    entity['HP'] += value  # will subtract if value is negative
+
+    if entity['HP'] <= 0:  # entity is dead
+        entity['HP'] = 0
+
+    if entity['HP'] > entity['max_HP']:  # full health
+        entity['HP'] = entity['max_HP']
+
+    print((entity['name'].title() + '\'s'), 'HP modified from', hp_before, 'to', entity['HP'])
+
+
 def attack(attacker, defender):
     """
     Attempt an attack from one entity on another.
@@ -76,17 +113,17 @@ def attack(attacker, defender):
     :param defender: a dictionary containing the defending character
     :return: the damage dealt to the defender as an int
     """
-    dexterity_check = roll_die(1, 20)
-    print('The dexterity check was', dexterity_check)
-    print('Defender dexterity is', defender['Dexterity'])
-    if dexterity_check > defender['Dexterity']:
-        damage = hit_die(attacker['Class'])
-        print(attacker['Name'], 'dealt', damage, 'damage to', (defender['Name'] + '!'))
-        return damage
-
-    else:
-        print('The attack missed!')
-        return 0
+    # dexterity_check = roll_die(1, 20)
+    # print('The dexterity check was', dexterity_check)
+    # print('Defender dexterity is', defender['Dexterity'])
+    # if dexterity_check > defender['Dexterity']:
+    #     damage = hit_die(attacker['Class'])
+    #     print(attacker['Name'], 'dealt', damage, 'damage to', (defender['Name'] + '!'))
+    #     return damage
+    #
+    # else:
+    #     print('The attack missed!')
+    #     return 0
 
 
 def combat_round(player, monster):
@@ -139,6 +176,8 @@ def main():
     """
 
     monster_encounter(generate_monster(MONSTER_TYPES, MONSTER_DESCRIPTIONS))
+
+    populate_dungeon(GAME_BOARD)
 
 
 if __name__ == "__main__":

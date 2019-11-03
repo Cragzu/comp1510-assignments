@@ -4,6 +4,7 @@ File containing all constants in the SUD.
 Room descriptions credit: Matthew Sernett, wizards.com
 """
 
+# monster info to pull from
 MONSTER_TYPES = ['dragon', 'goblin', 'ghost', 'slime', 'vampire', 'gelatinous cube', 'slaad', 'zombie', 'banshee']
 MONSTER_DESCRIPTIONS = ['horrible', 'dark', 'terrifying', 'deadly', 'pale', 'wicked', 'flying', 'sinister']
 
@@ -105,3 +106,8 @@ GAME_BOARD = [
                      "fighting pit or gladiatorial arena even stronger."}
      ]
 ]
+
+# character description
+PLAYER = {'name': 'Zote the Mighty', 'description': 'An intrepid traveller seeking the riches of this dungeon.',
+          'goal': 'To find the treasure hidden within this maze of twisty tunnels',
+          'HP': 10, 'max_HP': 10, 'hit_die': 6}

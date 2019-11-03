@@ -1,33 +1,66 @@
 """
 Module containing functions that manage the character/user in the SUD.
 """
-from monster import generate_monster, MONSTER_TYPES, MONSTER_DESCRIPTIONS
-
+from constants import PLAYER
 # todo: should contain character description, health, healing
 
 
-def modify_hp(entity, value):
+def describe_character(character):
     """
-    Update the HP value of an entity.
+    Print information about the user's character.
 
-    Add the value to the current HP of the entity, capping it at its max HP and at 0.
-
-    :param entity: a dictionary containing a player or monster
-    :param value: an int representing the value to change the HP by, can be positive or negative
-    :precondition: entity must be a properly formed dictionary
-    :return: none, modifies the given entity and prints information
+    :param character: a dictionary containing character information
+    :precondition: the character dict must be properly formed, with keys for name, description, goal, HP, and max_HP
+    :return: none, uses print statements
     """
-    hp_before = entity['HP']
+    print('You are', (character['name'] + '.'), character['description'])
+    print('Your goal:', (character['goal'] + '.'))
 
-    entity['HP'] += value  # will subtract if value is negative
+    print('\nCurrent HP:', (str(character['HP']) + '/' + str(character['max_HP'])))
 
-    if entity['HP'] <= 0:  # entity is dead
-        entity['HP'] = 0
 
-    if entity['HP'] > entity['max_HP']:  # full health
-        entity['HP'] = entity['max_HP']
+def input_loop(prompt, valid_choices):
+    """
+    Prompt the user repeatedly for a choice until a valid input is entered.
 
-    print((entity['name'].title() + '\'s'), 'HP modified from', hp_before, 'to', entity['HP'])
+    :param prompt: a string describing what the user can choose from
+    :param valid_choices: a list containing chars representing the available choices
+    :precondition: the valid_choices list must contain only length-1 strings of capital letters
+    :return: a char representing the user's choice
+    """
+    valid_input = False
+    while not valid_input:
+        user_choice = (input(prompt)).upper()
+
+        if user_choice not in valid_choices:  # check if input is valid
+            print('Sorry, that wasn\'t a valid input. Please try again.')
+
+        else:
+            valid_input = True
+
+    return user_choice
+
+
+def move(current_position):
+    print('Current position:', current_position)
+    # todo: make this dynamic? how?
+
+    direction = input_loop('Move (N)orth, (S)outh, (E)ast, or (W)est?: ', ['N', 'S', 'E', 'W'])
+
+    if direction == 'N':
+        current_position[0] += 1
+
+    elif direction == 'S':
+        current_position[0] -= 1
+
+    elif direction == 'E':
+        current_position[1] += 1
+
+    elif direction == 'W':
+        current_position[1] -= 1
+
+    print('New position:', current_position)
+    return current_position
 
 
 def main():
@@ -35,14 +68,7 @@ def main():
     Drive the SUD program.
     """
 
-    monster = generate_monster(MONSTER_TYPES, MONSTER_DESCRIPTIONS)
-    print(monster)
-
-    modify_hp(monster, -3)
-    modify_hp(monster, 2)
-
-    print(monster)
-
+    describe_character(PLAYER)
 
 if __name__ == "__main__":
     main()
