@@ -19,7 +19,7 @@ def generate_monster(types, descriptions):
     :return: a dictionary containing monster data
     """
     monster = {'name': random.choice(types), 'description': random.choice(descriptions),
-               'HP': 5, 'hit_die': 6}
+               'HP': 5, 'max_HP': 5, 'hit_die': 6}
     return monster
 
 
@@ -43,7 +43,7 @@ def monster_encounter(monster):
     # todo: code for fights
 
 
-def backstab():  # todo: docstring. returns the amount of damage taken from the backstab, 0 if it didn't happen
+def backstab():
     """
     Attempt a backstab on the player.
 
@@ -64,6 +64,76 @@ def backstab():  # todo: docstring. returns the amount of damage taken from the 
     else:
         print('You got away safely!')
         return 0
+
+
+def attack(attacker, defender):
+    """
+    Attempt an attack from one entity on another.
+
+    Roll a die and check the result against the defender's dexterity to determine whether the attack misses. If the
+    attack hits, roll the attacker's hit die to determine the damage dealt.
+
+    :precondition: hit_die function must work as expected
+    :precondition: attacker and defender must be properly formed character dictionaries
+    :param attacker: a dictionary containing the attacking character
+    :param defender: a dictionary containing the defending character
+    :return: the damage dealt to the defender as an int
+    """
+    dexterity_check = roll_die(1, 20)
+    print('The dexterity check was', dexterity_check)
+    print('Defender dexterity is', defender['Dexterity'])
+    if dexterity_check > defender['Dexterity']:
+        damage = hit_die(attacker['Class'])
+        print(attacker['Name'], 'dealt', damage, 'damage to', (defender['Name'] + '!'))
+        return damage
+
+    else:
+        print('The attack missed!')
+        return 0
+
+
+def combat_round(player, monster):
+    """
+    Simulate a round of combat between two characters.
+
+    Roll a d20 for each character to determine who attacks first. If rolls are equal, continue rolling until one is
+    higher. Call the attack function with the attacker and defender and adjust the defender's HP. If the defender
+    survives the attack (HP > 0), call the attack function again with the roles reversed for a counterattack.
+
+    :param opponent_one: a dictionary containing a character
+    :param opponent_two: a dictionary containing a character
+    :return: none, uses print statements
+    """
+
+    print('Rolling to determine attack priority...')
+    equal_rolls = True
+    while equal_rolls:  # determine start player
+        opponent_one_roll = roll_die(1, 20)
+        print(opponent_one['Name'], 'rolled:', opponent_one_roll)
+
+        opponent_two_roll = roll_die(1, 20)
+        print(opponent_two['Name'], 'rolled:', opponent_two_roll)
+
+        if opponent_one_roll > opponent_two_roll:
+            print(opponent_one['Name'], 'attacks first!')
+            equal_rolls = False
+            opponent_two['HP'][1] -= attack(opponent_one, opponent_two)
+            if opponent_two['HP'][1] > 0:
+                opponent_one['HP'][1] -= attack(opponent_two, opponent_one)
+            else:
+                print(opponent_two['Name'], 'was defeated!')
+
+        elif opponent_two_roll > opponent_one_roll:
+            print(opponent_two['Name'], 'attacks first!')
+            equal_rolls = False
+            opponent_one['HP'][1] -= attack(opponent_two, opponent_one)
+            if opponent_one['HP'][1] > 0:
+                opponent_two['HP'][1] -= attack(opponent_one, opponent_two)
+            else:
+                print(opponent_one['Name'], 'was defeated!')
+
+        else:
+            print('A tie! Rolling again...')
 
 
 def main():
