@@ -4,7 +4,6 @@ Module containing monster functions for SUD.
 import random
 from sud import input_loop
 
-# todo: should contain monster health
 
 MONSTER_TYPES = ['dragon', 'goblin', 'ghost', 'slime', 'vampire', 'gelatinous cube', 'slaad', 'zombie', 'banshee']
 MONSTER_DESCRIPTIONS = ['horrible', 'dark', 'terrifying', 'deadly', 'pale', 'wicked', 'flying', 'sinister']
@@ -41,8 +40,19 @@ def monster_encounter(monster):
     if fight_decision == 'R':
         backstab()
 
+    # todo: code for fights
 
-def backstab():
+
+def backstab():  # todo: docstring. returns the amount of damage taken from the backstab, 0 if it didn't happen
+    """
+    Attempt a backstab on the player.
+
+    Calculate whether or not the backstab was successful based on a 10% chance. If it was, apply a random amount of
+    damage between 1 and 4. If not, the player takes no damage.
+
+    :postcondition: function will return an int between 0 and 4
+    :return: an int representing the damage done by the backstab
+    """
     stab_chance = random.randint(1, 10)
 
     if stab_chance == 1:  # 10% chance of backstabbing
