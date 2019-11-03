@@ -106,6 +106,7 @@ GAME_BOARD = [
                      "fighting pit or gladiatorial arena even stronger."}
      ]
 ]
+VICTORY_ROOM = [4, 3]
 
 # character description
 PLAYER = {'name': 'Zote the Mighty', 'description': 'An intrepid traveller seeking the riches of this dungeon.',

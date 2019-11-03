@@ -41,18 +41,18 @@ def input_loop(prompt, valid_choices):  # todo: typing quit should end program
     return user_choice
 
 
-def move(current_position):
+def move(current_position):  # todo: docstring
     """
 
     :param current_position:
     :return:
     """
-    print('Current position:', current_position)
+    print('Current position:', current_position)  # todo: remove this later
 
     prompt_list = valid_movements(current_position)[0]
 
     if len(prompt_list) < 4:
-        print('You\'ve reached a wall!')
+        print('You\'ve reached a wall! Best not to continue past here or you will likely be eaten by a grue...')
 
     prompt = 'Which direction to move? You can go: '
     for i in prompt_list:
@@ -72,18 +72,5 @@ def move(current_position):
     elif direction == 'W':
         current_position[1] -= 1
 
-    print('New position:', current_position)
+    print('New position:', current_position) # todo: remove this later
     return current_position
-
-
-def main():
-    """
-    Drive the SUD program.
-    """
-
-    describe_character(PLAYER)
-
-    move([0, 0])
-
-if __name__ == "__main__":
-    main()

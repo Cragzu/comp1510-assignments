@@ -2,9 +2,10 @@
 Main module that runs the Single User Dungeon.
 """
 # todo: imports go here. should be importing most things from here
-from constants import GAME_BOARD, PLAYER
+from constants import GAME_BOARD, PLAYER, VICTORY_ROOM
 from map import describe_room
-from character import describe_character, input_loop
+from character import describe_character, input_loop, move
+from monster import populate_dungeon
 
 
 def introduction():
@@ -28,7 +29,18 @@ def introduction():
     input_loop('\nReady to (S)tart?: ', ['S'])
 
     print('Entering the dungeon...\n')
-    describe_character(PLAYER)
+
+
+def gameplay_loop():
+
+    current_position = [2, 2]  # starting position
+
+    victory_reached = False
+    while not victory_reached:
+        describe_character(PLAYER)
+        move(current_position)
+        if current_position == VICTORY_ROOM:  # quit
+            victory_reached = True  # todo: victory text? in separate function
 
 
 def main():
@@ -36,7 +48,11 @@ def main():
     Drive the SUD program.
     """
 
-    introduction()
+    #introduction()
+
+    populate_dungeon(GAME_BOARD)
+
+    gameplay_loop()
 
 
 if __name__ == "__main__":
