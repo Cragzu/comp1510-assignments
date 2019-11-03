@@ -3,7 +3,6 @@ Module containing functions that manage the character/user in the SUD.
 """
 from constants import PLAYER
 from map import valid_movements
-# todo: should contain character description, health, healing
 
 
 def describe_character(character):
@@ -20,7 +19,7 @@ def describe_character(character):
     print('\nCurrent HP:', (str(character['HP']) + '/' + str(character['max_HP'])))
 
 
-def input_loop(prompt, valid_choices):
+def input_loop(prompt, valid_choices):  # todo: typing quit should end program
     """
     Prompt the user repeatedly for a choice until a valid input is entered.
 
@@ -43,10 +42,18 @@ def input_loop(prompt, valid_choices):
 
 
 def move(current_position):
+    """
+
+    :param current_position:
+    :return:
+    """
     print('Current position:', current_position)
-    # todo: make this dynamic? how?
 
     prompt_list = valid_movements(current_position)[0]
+
+    if len(prompt_list) < 4:
+        print('You\'ve reached a wall!')
+
     prompt = 'Which direction to move? You can go: '
     for i in prompt_list:
         prompt += (i + ' ')
@@ -76,7 +83,7 @@ def main():
 
     describe_character(PLAYER)
 
-    move([0, 2])
+    move([0, 0])
 
 if __name__ == "__main__":
     main()
