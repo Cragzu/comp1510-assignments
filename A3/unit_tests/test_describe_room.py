@@ -1,8 +1,9 @@
-from unittest import TestCase
-from map import describe_room
 import io
-import unittest.mock
 import random
+import unittest.mock
+from unittest import TestCase
+
+from map import describe_room
 
 
 class TestDescribeRoom(TestCase):

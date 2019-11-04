@@ -2,6 +2,8 @@
 Module containing logic for the game board of the SUD.
 """
 from constants import GAME_BOARD
+
+
 # todo: unit tests
 
 
@@ -22,6 +24,12 @@ def valid_movements(current_position):
 
     :param current_position: a list containing two coordinates equivalent to the room location
     :return: a list containing two lists with only the valid options
+
+    >>> valid_movements([2, 2])
+    [['(N)orth', '(S)outh', '(E)ast', '(W)est'], ['N', 'S', 'E', 'W']]
+
+     >>> valid_movements([0, 0])
+    [['(S)outh', '(E)ast'], ['S', 'E']]
     """
     instructions = ['(N)orth', '(S)outh', '(E)ast', '(W)est']  # for printing available options
     directions = ['N', 'S', 'E', 'W']
@@ -43,3 +51,18 @@ def valid_movements(current_position):
         instructions.remove('(E)ast')
 
     return [instructions, directions]
+
+
+def main():
+    """
+    Drive the SUD program.
+    """
+
+    print(valid_movements([0, 2]))
+
+
+if __name__ == "__main__":
+    main()
+
+
+

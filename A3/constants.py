@@ -112,3 +112,6 @@ VICTORY_ROOM = [4, 3]
 PLAYER = {'name': 'Alberto the Mighty', 'description': 'An intrepid traveller seeking the riches of this dungeon.',
           'goal': 'To find the treasure hidden within this maze of twisty tunnels',
           'HP': 10, 'max_HP': 10, 'hit_die': 6}
+
+# display
+DIVIDING_LINE = '\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n'
