@@ -12,7 +12,7 @@ def describe_room(current_position):
     :return: none, uses print statements
     """
     room = GAME_BOARD[current_position[0]][current_position[1]]
-    print(room['description'])
+    print(room['description'] + '\n')
 
 
 def valid_movements(current_position):

@@ -43,14 +43,20 @@ def monster_encounter(monster):
     :precondition: monster dict must be properly formed as per generate_monster postcondition
     :return: a string ('F'/'R') representing whether the player wants to fight or run away
     """
-    print('You encountered a', monster['description'], (monster['name'] + '!'))
+    encounter_chance = random.randint(1, 4)
 
-    fight_decision = input_loop('Do you want to (F)ight or (R)un away?: ', ['F', 'R'])
+    if encounter_chance == 1:  # 25% chance of encountering a monster
+        print('\nYou encountered a', monster['description'], (monster['name'] + '!'))
 
-    if fight_decision == 'R':
-        backstab()
+        fight_decision = input_loop('Do you want to (F)ight or (R)un away?: ', ['F', 'R'])
 
-    # todo: code for fights
+        if fight_decision == 'R':
+            backstab()
+
+        # todo: code for fights
+
+    else:
+        print('\nThere doesn\'t seem to be any monsters here right now.')
 
 
 def backstab():
@@ -179,6 +185,7 @@ def main():
 
     populate_dungeon(GAME_BOARD)
 
+    monster_encounter(GAME_BOARD)
 
 if __name__ == "__main__":
     main()

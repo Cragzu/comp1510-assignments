@@ -5,7 +5,15 @@ Main module that runs the Single User Dungeon.
 from constants import GAME_BOARD, PLAYER, VICTORY_ROOM
 from map import describe_room
 from character import describe_character, input_loop, move
-from monster import populate_dungeon
+from monster import populate_dungeon, monster_encounter
+
+
+def dividing_line():
+    """
+    Prints a line to divide sections of printed output.
+    :return: none
+    """
+    print('\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')  # dividing line
 
 
 def introduction():
@@ -29,18 +37,52 @@ def introduction():
     input_loop('\nReady to (S)tart?: ', ['S'])
 
     print('Entering the dungeon...\n')
+    dividing_line()
 
 
 def gameplay_loop():
+    """
+    Run the game.
+
+    Continuously loop the gameplay until the user wins or quits.
+
+    :return: none
+    """
 
     current_position = [2, 2]  # starting position
 
     victory_reached = False
     while not victory_reached:
+
+
+        describe_room(current_position)
         describe_character(PLAYER)
         move(current_position)
+
         if current_position == VICTORY_ROOM:  # quit
             victory_reached = True  # todo: victory text? in separate function
+
+        current_monster = GAME_BOARD[current_position[0]][current_position[1]]['monster']  # get monster from matrix
+        monster_encounter(current_monster)
+
+        dividing_line()
+
+    victory(current_position)
+
+
+def victory(current_position):
+    """
+    Print victory text and end the game.
+
+    :param current_position: a list containing two coordinates equivalent to the room location
+    :return: none
+    """
+
+    dividing_line()
+    describe_room(current_position)
+
+    print('You found the treasure! You win!')
+    print('Thank you for playing.')
 
 
 def main():
@@ -48,7 +90,9 @@ def main():
     Drive the SUD program.
     """
 
-    #introduction()
+
+
+    introduction()
 
     populate_dungeon(GAME_BOARD)
 
