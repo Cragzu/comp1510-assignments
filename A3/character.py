@@ -19,7 +19,7 @@ def describe_character(character):
     print('\nCurrent HP:', (str(character['HP']) + '/' + str(character['max_HP'])))
 
 
-def input_loop(prompt, valid_choices):  # todo: typing quit should end program
+def input_loop(prompt, valid_choices):
     """
     Prompt the user repeatedly for a choice until a valid input is entered.
 
@@ -47,11 +47,12 @@ def input_loop(prompt, valid_choices):  # todo: typing quit should end program
     return user_choice
 
 
-def move(current_position):  # todo: docstring
+def move(current_position):
     """
+    Update the character's position on the game board.
 
-    :param current_position:
-    :return:
+    :param current_position: a list containing two coordinates equivalent to the room location
+    :return: an updated version of current_position with one of the ints incremented
     """
     print('Current position:', current_position)  # todo: remove this later
 

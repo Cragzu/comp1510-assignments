@@ -2,7 +2,7 @@
 Module containing monster functions for SUD.
 """
 import random
-from constants import GAME_BOARD, MONSTER_TYPES, MONSTER_DESCRIPTIONS
+from constants import PLAYER, MONSTER_TYPES, MONSTER_DESCRIPTIONS
 from character import input_loop
 
 
@@ -53,7 +53,8 @@ def monster_encounter(monster):
         if fight_decision == 'R':
             backstab()
 
-        # todo: code for fights
+        else:  # fight
+            battle(PLAYER, monster)
 
     else:
         print('\nThere doesn\'t seem to be any monsters here right now.')
@@ -110,70 +111,52 @@ def attack(attacker, defender):
     """
     Attempt an attack from one entity on another.
 
-    Roll a die and check the result against the defender's dexterity to determine whether the attack misses. If the
-    attack hits, roll the attacker's hit die to determine the damage dealt.
+    Check whether the attack misses (10%)
 
-    :precondition: hit_die function must work as expected
     :precondition: attacker and defender must be properly formed character dictionaries
     :param attacker: a dictionary containing the attacking character
     :param defender: a dictionary containing the defending character
     :return: the damage dealt to the defender as an int
     """
-    # dexterity_check = roll_die(1, 20)
-    # print('The dexterity check was', dexterity_check)
-    # print('Defender dexterity is', defender['Dexterity'])
-    # if dexterity_check > defender['Dexterity']:
-    #     damage = hit_die(attacker['Class'])
-    #     print(attacker['Name'], 'dealt', damage, 'damage to', (defender['Name'] + '!'))
-    #     return damage
-    #
-    # else:
-    #     print('The attack missed!')
-    #     return 0
+    miss_chance = random.randint(1, 10)
+
+    if miss_chance == 1:  # 10% chance to miss
+        print('The attack from', attacker['name'].title(), 'missed!')
+        return 0
+
+    else:
+        damage = random.randint(1, (attacker['hit_die']))
+        print(attacker['name'].title(), 'dealt', damage, 'damage to', (defender['name'].title() + '!'))
+        return -damage
 
 
-def combat_round(player, monster):
+def battle(character, monster):  # a battle to the death, call combat_round alternating until someone dies
     """
-    Simulate a round of combat between two characters.
+    Simulate a battle between the player and a monster.
 
-    Roll a d20 for each character to determine who attacks first. If rolls are equal, continue rolling until one is
-    higher. Call the attack function with the attacker and defender and adjust the defender's HP. If the defender
-    survives the attack (HP > 0), call the attack function again with the roles reversed for a counterattack.
+    Randomly determine attack priority.
 
-    :param opponent_one: a dictionary containing a character
-    :param opponent_two: a dictionary containing a character
-    :return: none, uses print statements
+    Call the attack function with the attacker and defender and adjust the defender's HP.
+    Continue with the roles reversed until someone dies.
+
+    :return:
     """
+    combatants = [character, monster]  # index 0 is attacker, 1 is defender
+    random.shuffle(combatants)
 
-    # print('Rolling to determine attack priority...')
-    # equal_rolls = True
-    # while equal_rolls:  # determine start player
-    #     opponent_one_roll = roll_die(1, 20)
-    #     print(opponent_one['Name'], 'rolled:', opponent_one_roll)
-    #
-    #     opponent_two_roll = roll_die(1, 20)
-    #     print(opponent_two['Name'], 'rolled:', opponent_two_roll)
-    #
-    #     if opponent_one_roll > opponent_two_roll:
-    #         print(opponent_one['Name'], 'attacks first!')
-    #         equal_rolls = False
-    #         opponent_two['HP'][1] -= attack(opponent_one, opponent_two)
-    #         if opponent_two['HP'][1] > 0:
-    #             opponent_one['HP'][1] -= attack(opponent_two, opponent_one)
-    #         else:
-    #             print(opponent_two['Name'], 'was defeated!')
-    #
-    #     elif opponent_two_roll > opponent_one_roll:
-    #         print(opponent_two['Name'], 'attacks first!')
-    #         equal_rolls = False
-    #         opponent_one['HP'][1] -= attack(opponent_two, opponent_one)
-    #         if opponent_one['HP'][1] > 0:
-    #             opponent_two['HP'][1] -= attack(opponent_one, opponent_two)
-    #         else:
-    #             print(opponent_one['Name'], 'was defeated!')
-    #
-    #     else:
-    #         print('A tie! Rolling again...')
+    continue_battle = True
+    while continue_battle:
+        modify_hp(combatants[1], attack(combatants[0], combatants[1]))
+        print('\n')
+
+        temp = combatants[0]
+        combatants[0] = combatants[1]
+        combatants[1] = temp
+
+        if combatants[0]['HP'] == 0 or combatants[1]['HP'] == 0:
+            continue_battle = False
+
+
 
 
 def main():
@@ -181,11 +164,13 @@ def main():
     Drive the SUD program.
     """
 
-    monster_encounter(generate_monster(MONSTER_TYPES, MONSTER_DESCRIPTIONS))
+    battle(PLAYER, generate_monster(MONSTER_TYPES, MONSTER_DESCRIPTIONS))
 
-    populate_dungeon(GAME_BOARD)
+    # my_monster = generate_monster(MONSTER_TYPES, MONSTER_DESCRIPTIONS)
+    #
+    # damage = (attack(my_monster, PLAYER))
+    # modify_hp(my_monster, -5)
 
-    monster_encounter(GAME_BOARD)
 
 if __name__ == "__main__":
     main()

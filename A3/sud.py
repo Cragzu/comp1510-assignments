@@ -48,19 +48,17 @@ def gameplay_loop():
 
     :return: none
     """
-
     current_position = [2, 2]  # starting position
 
     victory_reached = False
     while not victory_reached:
-
 
         describe_room(current_position)
         describe_character(PLAYER)
         move(current_position)
 
         if current_position == VICTORY_ROOM:  # quit
-            victory_reached = True  # todo: victory text? in separate function
+            victory_reached = True
 
         current_monster = GAME_BOARD[current_position[0]][current_position[1]]['monster']  # get monster from matrix
         monster_encounter(current_monster)
@@ -89,8 +87,6 @@ def main():
     """
     Drive the SUD program.
     """
-
-
 
     introduction()
 

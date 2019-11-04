@@ -42,16 +42,3 @@ def valid_movements(current_position):
         instructions.remove('(E)ast')
 
     return [instructions, directions]
-
-
-
-
-def main():
-    """
-    Drive the SUD program.
-    """
-
-
-
-if __name__ == "__main__":
-    main()
