@@ -37,7 +37,7 @@ def input_loop(prompt, valid_choices):
         if user_choice not in valid_choices:  # check if input is valid
             print('Sorry, that wasn\'t a valid input. Please try again.')
 
-        elif user_choice == 'QUIT':  # end program
+        elif user_choice == 'QUIT':  # todo: do this using return instead of exit (bad)
             print('You successfully escaped the dungeon. Maybe you\'ll find the treasure another day...')
             exit()
 
@@ -54,12 +54,10 @@ def move(current_position):
     :param current_position: a list containing two coordinates equivalent to the room location
     :return: an updated version of current_position with one of the ints incremented
     """
-    print('Current position:', current_position)  # todo: remove this later
-
     prompt_list = valid_movements(current_position)[0]
 
     if len(prompt_list) < 4:
-        print('You\'ve reached a wall! Best not to continue past here or you will likely be eaten by a grue...')
+        print('You\'ve reached a dead end! Best not to continue past here or you will likely be eaten by a grue...')
 
     prompt = 'Which direction to move? You can go: '
     for i in prompt_list:
@@ -79,5 +77,4 @@ def move(current_position):
     elif direction == 'W':
         current_position[1] -= 1
 
-    print('New position:', current_position) # todo: remove this later
     return current_position

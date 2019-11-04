@@ -12,4 +12,3 @@ class TestValidMovements(TestCase):
 
     def test_corner(self):
         self.assertEqual(valid_movements([0, 0]), [['(S)outh', '(E)ast'], ['S', 'E']])
-

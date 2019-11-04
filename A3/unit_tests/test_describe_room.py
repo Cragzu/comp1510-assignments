@@ -14,4 +14,3 @@ class TestDescribeRoom(TestCase):
         describe_room([random.randint(0, 4), random.randint(0, 4)])  # check random room to ensure it has a description
 
         self.assertIsInstance(mock_stdout.getvalue(), str)
-
