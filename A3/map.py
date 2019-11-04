@@ -2,6 +2,7 @@
 Module containing logic for the game board of the SUD.
 """
 from constants import GAME_BOARD
+# todo: unit tests
 
 
 def describe_room(current_position):
