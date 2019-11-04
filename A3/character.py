@@ -28,12 +28,18 @@ def input_loop(prompt, valid_choices):  # todo: typing quit should end program
     :precondition: the valid_choices list must contain only length-1 strings of capital letters
     :return: a char representing the user's choice
     """
+    valid_choices.append('QUIT')  # account for quitting the program
+
     valid_input = False
     while not valid_input:
         user_choice = (input(prompt)).upper()
 
         if user_choice not in valid_choices:  # check if input is valid
             print('Sorry, that wasn\'t a valid input. Please try again.')
+
+        elif user_choice == 'QUIT':  # end program
+            print('You successfully escaped the dungeon. Maybe you\'ll find the treasure another day...')
+            exit()
 
         else:
             valid_input = True
