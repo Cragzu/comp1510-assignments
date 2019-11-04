@@ -57,7 +57,9 @@ def monster_encounter(monster):
             battle(PLAYER, monster)
 
     else:
-        print('\nThere doesn\'t seem to be any monsters here right now.')
+        print('\nThere don\'t seem to be any monsters here right now.')
+        print('You take a moment to catch your breath, healing a little.')
+        modify_hp(PLAYER, 2)
 
 
 def backstab():
