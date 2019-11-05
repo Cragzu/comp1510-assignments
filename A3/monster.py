@@ -1,11 +1,12 @@
 """
 Module containing monster functions for SUD.
 """
-import random
+import random, atexit
 from constants import PLAYER, MONSTER_TYPES, MONSTER_DESCRIPTIONS
-from character import input_loop
+from character import input_loop, exit_behaviour
 
 # todo: unit tests
+
 
 def generate_monster(types, descriptions):
     """
@@ -55,11 +56,15 @@ def monster_encounter(monster):
 
             if fight_decision == 'R':
                 backstab()
-                return
 
             else:  # fight
                 battle(PLAYER, monster)
-                return
+
+            if PLAYER['HP'] == 0:  # player died
+                atexit.register(exit_behaviour, case='death')
+                exit()
+
+            return
 
         else:
             print('\nThere don\'t seem to be any monsters here right now.')
@@ -170,10 +175,6 @@ def battle(character, monster):  # a battle to the death, call combat_round alte
     if monster['HP'] == 0:
         print('The monster was slain!')
         monster['name'] = ''
-
-    else:  # player died
-        print('You were defeated! Future adventurers will discover your remains as a gruesome warning...')
-        exit()
 
 
 

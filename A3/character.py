@@ -2,8 +2,23 @@
 Module containing functions that manage the character/user in the SUD.
 """
 from map import valid_movements
+import atexit
 
 # todo: unit tests
+
+
+def exit_behaviour(case: str):
+    """
+    Print statements before exiting the program.
+    :param case:
+    :return:
+    """
+    if case == 'death':
+        print('You were defeated! Future adventurers will discover your remains as a gruesome warning...')
+
+    else:
+        print('You successfully escaped the dungeon. Maybe you\'ll find the treasure another day...')
+
 
 def describe_character(character):
     """
@@ -38,7 +53,7 @@ def input_loop(prompt, valid_choices):
             print('Sorry, that wasn\'t a valid input. Please try again.')
 
         elif user_choice == 'QUIT':  # todo: do this using return instead of exit (bad)
-            print('You successfully escaped the dungeon. Maybe you\'ll find the treasure another day...')
+            atexit.register(exit_behaviour, case='quit')
             exit()
 
         else:
