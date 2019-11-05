@@ -10,8 +10,11 @@ import atexit
 def exit_behaviour(case: str):
     """
     Print statements before exiting the program.
-    :param case:
-    :return:
+
+    :param case: a string representing the code for the string to print
+    :precondition: case must be one of the specified strings, else function will default to a generic quit message.
+    :postcondition: function will print the appropriate statement depending on the situation in which the user exits.
+    :return: none, uses print statements
     """
     if case == 'death':
         print('You were defeated! Future adventurers will discover your remains as a gruesome warning...')
@@ -20,7 +23,7 @@ def exit_behaviour(case: str):
         print('You successfully escaped the dungeon. Maybe you\'ll find the treasure another day...')
 
 
-def describe_character(character):
+def describe_character(character: dict):
     """
     Print information about the user's character.
 
@@ -34,14 +37,14 @@ def describe_character(character):
     print('\nCurrent HP:', (str(character['HP']) + '/' + str(character['max_HP'])))
 
 
-def input_loop(prompt, valid_choices):
+def input_loop(prompt: str, valid_choices: list) -> str:
     """
     Prompt the user repeatedly for a choice until a valid input is entered.
 
     :param prompt: a string describing what the user can choose from
     :param valid_choices: a list containing chars representing the available choices
     :precondition: the valid_choices list must contain only length-1 strings of capital letters
-    :return: a char representing the user's choice
+    :return: a string representing the user's choice; one of the strings in valid_choices
     """
     valid_choices.append('QUIT')  # account for quitting the program
 
@@ -62,7 +65,7 @@ def input_loop(prompt, valid_choices):
     return user_choice
 
 
-def move(current_position):
+def move(current_position: list) -> list:
     """
     Update the character's position on the game board.
 

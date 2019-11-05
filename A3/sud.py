@@ -14,6 +14,8 @@ def introduction():
 
     Teach the player how to play and present them with their character and objectives.
 
+    :precondition: this function should be executed as the first thing in the game.
+    :postcondition: function will print helpful introductory text and instructions, and provide a simple input tutorial.
     :return: none, uses print statements
     """
     print('Welcome to the dungeon!\n')
@@ -38,6 +40,7 @@ def gameplay_loop():
 
     Continuously loop the gameplay until the user wins or quits.
 
+    :postcondition: the game will be over once this function terminates.
     :return: none
     """
     current_position = [2, 2]  # starting position
@@ -60,12 +63,14 @@ def gameplay_loop():
     victory(current_position)
 
 
-def victory(current_position):
+def victory(current_position: list):
     """
     Print victory text and end the game.
 
     :param current_position: a list containing two coordinates equivalent to the room location
-    :return: none
+    :precondition: function should only be executed when the player has won the game
+    :postcondition: function will print victory text and end the program.
+    :return: none, uses print statements
     """
 
     print(DIVIDING_LINE)

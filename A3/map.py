@@ -4,7 +4,7 @@ Module containing logic for the game board of the SUD.
 from constants import GAME_BOARD
 
 
-def describe_room(current_position):
+def describe_room(current_position: list):
     """
     Print a description of the current room.
 
@@ -15,7 +15,7 @@ def describe_room(current_position):
     print(room['description'] + '\n')
 
 
-def valid_movements(current_position):
+def valid_movements(current_position: list) -> list:
     """
     Determine which movements can be taken based on the user's position in the game board.
 

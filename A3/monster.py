@@ -8,7 +8,7 @@ from character import input_loop, exit_behaviour
 # todo: unit tests
 
 
-def generate_monster(types, descriptions):
+def generate_monster(types: list, descriptions: list) -> dict:
     """
     Generate a random monster and store its data.
 
@@ -22,12 +22,13 @@ def generate_monster(types, descriptions):
     return monster
 
 
-def populate_dungeon(dungeon):
+def populate_dungeon(dungeon: list):
     """
     Populate the rooms in the dungeon with monsters.
 
     :param dungeon: a list containing dungeon rooms
     precondition: dungeon is a properly formed matrix; a list containing 5 lists with 5 dicts representing 25 rooms
+    :postcondition: function will add the key 'monster' to all dicts in the dungeon, with a random monster as the value.
     :return: none, modifies the given dungeon
     """
     for row in dungeon:
@@ -35,7 +36,7 @@ def populate_dungeon(dungeon):
             room['monster'] = generate_monster(MONSTER_TYPES, MONSTER_DESCRIPTIONS)
 
 
-def monster_encounter(monster):
+def monster_encounter(monster: dict):
     """
     Simulate an encounter with a monster.
 
@@ -43,7 +44,8 @@ def monster_encounter(monster):
 
     :param monster: a dictionary containing monster data
     :precondition: monster dict must be properly formed as per generate_monster postcondition
-    :return:
+    :postcondition: either the player or the monster will be dead once function is finished
+    :return: none, uses print and calls other functions
     """
     if monster['name'] != '':
 
@@ -76,7 +78,7 @@ def monster_encounter(monster):
     modify_hp(PLAYER, 2)
 
 
-def backstab():
+def backstab() -> int:
     """
     Attempt a backstab on the player.
 
@@ -99,7 +101,7 @@ def backstab():
         return 0
 
 
-def modify_hp(entity, value):
+def modify_hp(entity: dict, value: int):
     """
     Update the HP value of an entity.
 
@@ -123,15 +125,17 @@ def modify_hp(entity, value):
     print((entity['name'].title() + '\'s'), 'HP modified from', hp_before, 'to', entity['HP'])
 
 
-def attack(attacker, defender):
+def attack(attacker: dict, defender: dict) -> int:
     """
     Attempt an attack from one entity on another.
 
-    Check whether the attack misses (10%)
+    Check whether the attack misses (10% chance), if it does return 0. Otherwise, generate a random number between
+    1 and the attacker's hit_die to represent the damage done. Return the negative equivalent of that number.
 
-    :precondition: attacker and defender must be properly formed character dictionaries
     :param attacker: a dictionary containing the attacking character
     :param defender: a dictionary containing the defending character
+    :precondition: attacker and defender must be properly formed character dictionaries
+    :postcondition: return value will be an int <= 0 representing damage dealt
     :return: the damage dealt to the defender as an int
     """
     miss_chance = random.randint(1, 10)
@@ -143,10 +147,10 @@ def attack(attacker, defender):
     else:
         damage = random.randint(1, (attacker['hit_die']))
         print(attacker['name'].title(), 'dealt', damage, 'damage to', (defender['name'].title() + '!'))
-        return -damage
+        return -damage  # damage dealt represented as a negative int for the modify_hp function
 
 
-def battle(character, monster):  # a battle to the death, call combat_round alternating until someone dies
+def battle(character: dict, monster: dict):
     """
     Simulate a battle between the player and a monster.
 
@@ -155,7 +159,11 @@ def battle(character, monster):  # a battle to the death, call combat_round alte
     Call the attack function with the attacker and defender and adjust the defender's HP.
     Continue with the roles reversed until someone dies.
 
-    :return:
+    :param character: a dictionary containing the player character
+    :param monster: a dictionary containing the encountered monster
+    :precondition: attacker and defender must be properly formed character dictionaries
+    :postcondition: battle will continue until either character or monster is dead
+    :return: none, modifies dictionaries directly
     """
     combatants = [character, monster]  # index 0 is attacker, 1 is defender
     random.shuffle(combatants)
@@ -175,21 +183,3 @@ def battle(character, monster):  # a battle to the death, call combat_round alte
     if monster['HP'] == 0:
         print('The monster was slain!')
         monster['name'] = ''
-
-
-
-def main():
-    """
-    Drive the SUD program.
-    """
-
-    battle(PLAYER, generate_monster(MONSTER_TYPES, MONSTER_DESCRIPTIONS))
-
-    # my_monster = generate_monster(MONSTER_TYPES, MONSTER_DESCRIPTIONS)
-    #
-    # damage = (attack(my_monster, PLAYER))
-    # modify_hp(my_monster, -5)
-
-
-if __name__ == "__main__":
-    main()
