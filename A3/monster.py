@@ -1,9 +1,12 @@
 """
 Module containing monster functions for SUD.
 """
-import random, atexit
-from constants import PLAYER, MONSTER_TYPES, MONSTER_DESCRIPTIONS
+import atexit
+import random
+
 from character import input_loop, exit_behaviour
+from constants import PLAYER, MONSTER_TYPES, MONSTER_DESCRIPTIONS
+
 
 # todo: unit tests
 

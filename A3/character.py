@@ -4,10 +4,8 @@ Module containing functions that manage the character/user in the SUD.
 from map import valid_movements
 import atexit
 
-# todo: unit tests
 
-
-def exit_behaviour(case: str):
+def exit_behaviour(case: str):  # todo: unit test for this after (if) Chris approves it
     """
     Print statements before exiting the program.
 
