@@ -5,6 +5,7 @@ import random
 from constants import PLAYER, MONSTER_TYPES, MONSTER_DESCRIPTIONS
 from character import input_loop
 
+# todo: unit tests
 
 def generate_monster(types, descriptions):
     """

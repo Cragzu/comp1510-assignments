@@ -6,6 +6,7 @@ from map import describe_room
 from character import describe_character, input_loop, move
 from monster import populate_dungeon, monster_encounter
 
+# todo: unit tests
 
 def introduction():
     """

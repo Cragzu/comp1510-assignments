@@ -4,9 +4,6 @@ Module containing logic for the game board of the SUD.
 from constants import GAME_BOARD
 
 
-# todo: unit tests
-
-
 def describe_room(current_position):
     """
     Print a description of the current room.
@@ -51,18 +48,3 @@ def valid_movements(current_position):
         instructions.remove('(E)ast')
 
     return [instructions, directions]
-
-
-def main():
-    """
-    Drive the SUD program.
-    """
-
-    print(valid_movements([0, 2]))
-
-
-if __name__ == "__main__":
-    main()
-
-
-

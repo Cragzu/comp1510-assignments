@@ -1,9 +1,9 @@
 """
 Module containing functions that manage the character/user in the SUD.
 """
-from constants import PLAYER
 from map import valid_movements
 
+# todo: unit tests
 
 def describe_character(character):
     """
