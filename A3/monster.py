@@ -42,25 +42,33 @@ def monster_encounter(monster):
 
     :param monster: a dictionary containing monster data
     :precondition: monster dict must be properly formed as per generate_monster postcondition
-    :return: a string ('F'/'R') representing whether the player wants to fight or run away
+    :return:
     """
-    encounter_chance = random.randint(1, 4)
+    if monster['name'] != '':
 
-    if encounter_chance == 1:  # 25% chance of encountering a monster
-        print('\nYou encountered a', monster['description'], (monster['name'] + '!'))
+        encounter_chance = random.randint(1, 4)
 
-        fight_decision = input_loop('Do you want to (F)ight or (R)un away?: ', ['F', 'R'])
+        if encounter_chance == 1:  # 25% chance of encountering a monster
+            print('\nYou encountered a', monster['description'], (monster['name'] + '!'))
 
-        if fight_decision == 'R':
-            backstab()
+            fight_decision = input_loop('Do you want to (F)ight or (R)un away?: ', ['F', 'R'])
 
-        else:  # fight
-            battle(PLAYER, monster)
+            if fight_decision == 'R':
+                backstab()
+                return
+
+            else:  # fight
+                battle(PLAYER, monster)
+                return
+
+        else:
+            print('\nThere don\'t seem to be any monsters here right now.')
 
     else:
-        print('\nThere don\'t seem to be any monsters here right now.')
-        print('You take a moment to catch your breath, healing a little.')
-        modify_hp(PLAYER, 2)
+        print('\nYou see the corpse of the monster you\'d previously slain here. Thankfully, it\'s still dead.')
+
+    print('You take a moment to catch your breath, healing a little.')
+    modify_hp(PLAYER, 2)
 
 
 def backstab():
@@ -159,6 +167,13 @@ def battle(character, monster):  # a battle to the death, call combat_round alte
         if combatants[0]['HP'] == 0 or combatants[1]['HP'] == 0:
             continue_battle = False
 
+    if monster['HP'] == 0:
+        print('The monster was slain!')
+        monster['name'] = ''
+
+    else:  # player died
+        print('You were defeated! Future adventurers will discover your remains as a gruesome warning...')
+        exit()
 
 
 
