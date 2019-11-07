@@ -186,3 +186,7 @@ def battle(character: dict, monster: dict):
     if monster['HP'] == 0:
         print('The monster was slain!')
         monster['name'] = ''
+
+    else:
+        atexit.register(exit_behaviour, case='death')
+        exit()
