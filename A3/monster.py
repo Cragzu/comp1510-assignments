@@ -8,9 +8,6 @@ from character import input_loop, exit_behaviour
 from constants import PLAYER, MONSTER_TYPES, MONSTER_DESCRIPTIONS
 
 
-# todo: unit tests
-
-
 def generate_monster(types: list, descriptions: list) -> dict:
     """
     Generate a random monster and store its data.
