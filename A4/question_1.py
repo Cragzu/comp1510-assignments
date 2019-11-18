@@ -2,7 +2,6 @@
 Part 1 of 8: Module containing the sieve of Eratosthenes algorithm for finding prime numbers.
 """
 import math
-# todo: unit tests
 
 
 def is_prime(num: int) -> bool:
