@@ -8,9 +8,6 @@ from character import input_loop, exit_behaviour
 from constants import PLAYER, MONSTER_TYPES, MONSTER_DESCRIPTIONS
 
 
-# todo: unit tests
-
-
 def generate_monster(types: list, descriptions: list) -> dict:
     """
     Generate a random monster and store its data.
@@ -186,3 +183,7 @@ def battle(character: dict, monster: dict):
     if monster['HP'] == 0:
         print('The monster was slain!')
         monster['name'] = ''
+
+    else:
+        atexit.register(exit_behaviour, case='death')
+        exit()

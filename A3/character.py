@@ -5,7 +5,7 @@ from map import valid_movements
 import atexit
 
 
-def exit_behaviour(case: str):  # todo: unit test for this after (if) Chris approves it
+def exit_behaviour(case: str):
     """
     Print statements before exiting the program.
 
@@ -53,7 +53,7 @@ def input_loop(prompt: str, valid_choices: list) -> str:
         if user_choice not in valid_choices:  # check if input is valid
             print('Sorry, that wasn\'t a valid input. Please try again.')
 
-        elif user_choice == 'QUIT':  # todo: do this using return instead of exit (bad)
+        elif user_choice == 'QUIT':
             atexit.register(exit_behaviour, case='quit')
             exit()
 
