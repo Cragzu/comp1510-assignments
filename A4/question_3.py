@@ -17,7 +17,7 @@ def dijkstra(colors: list):
     while not is_sorted:
         is_sorted = True
         for i in range(len(colors) - 1):
-            if color_order[colors[i]] > color_order[colors[i + 1]]:
+            if color_order[colors[i]] > color_order[colors[i + 1]]:  # bubble sort
                 colors[i], colors[i + 1] = colors[i + 1], colors[i]
                 is_sorted = False
 
