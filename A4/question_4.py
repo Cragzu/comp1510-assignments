@@ -20,7 +20,7 @@ def selection_sort(list_to_sort: list) -> list:  # todo: implement this with enu
     >>>selection_sort([3, 5, 1, 9, -4])
     [-4, 3, 1, 5, 9]
     """
-    if not list_to_sort:  # todo: raising error for list of unsortable items
+    if not list_to_sort:  # todo: raising error for list of unsortable items, use slices as in q1?
         raise Exception('The list doesn\'t contain sortable items! The given list was: {}'.format(list_to_sort))
 
     for unsorted_section in range(len(list_to_sort)):  # repeat as many times as the vector length
@@ -47,9 +47,6 @@ def main():
     print("Unsorted:", unsorted)
     sorted_copy = selection_sort(unsorted)
     print("Sorted:", sorted_copy)
-
-    for index, item in enumerate(unsorted):
-        print("Enumerating!:", index, item)
 
 
 if __name__ == "__main__":
