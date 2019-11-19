@@ -52,7 +52,7 @@ def eratosthenes(upperbound: int) -> list:
     primes = range_list  # list to modify
 
     for index, value in enumerate(range_list):
-        if value >= math.sqrt(upperbound):
+        if value >= math.sqrt(upperbound):  # only need to check values up to square root of upper bound
             break
         if is_prime(value):
             for higher_num in range_list[(index + 1):]:  # all items after the current item

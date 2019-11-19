@@ -18,4 +18,3 @@ class TestDijkstra(TestCase):
         dutch = ['red', 'white']
         dijkstra(dutch)
         self.assertEqual(dutch, ['red', 'white'])
-

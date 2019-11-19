@@ -1,5 +1,5 @@
 """
-Part 2 of 8: Module containing the Dutch National Flag function by Edsgar Dijkstra.
+Part 3 of 8: Module containing the Dutch National Flag function by Edsgar Dijkstra.
 """
 
 
@@ -17,9 +17,9 @@ def dijkstra(colors: list):
     while not is_sorted:
         is_sorted = True
         for i in range(len(colors) - 1):
-            if color_order[colors[i]] > color_order[colors[i + 1]]:  # bubble sort
-                colors[i], colors[i + 1] = colors[i + 1], colors[i]
-                is_sorted = False
+            if color_order[colors[i]] > color_order[colors[i + 1]]:  # bubble sort, check list items against dict value
+                colors[i], colors[i + 1] = colors[i + 1], colors[i]  # swap the items
+                is_sorted = False  # list is not yet sorted if a swap was made
 
 
 def main():
