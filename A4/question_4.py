@@ -3,7 +3,7 @@ Part 4 of 8: Module containing a selection sort algorithm.
 """
 
 
-def selection_sort(list_to_sort: list) -> list:  # todo: implement this with enumerate?
+def selection_sort(list_to_sort: list) -> list:
     """
     Sort a list using a selection sort algorithm.
 
