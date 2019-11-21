@@ -1,4 +1,8 @@
 """
+Part 6 of 8: Comments containing 6 disjointed equivalency partitions to test for a hypothetical function.
+"""
+
+"""
 Six Tests for Hypothetical Function line_intersect(l1, l2)
 
 l1 and l2 are lists containing 2 lists containing 2 floats, representing a line with 2 points on a grid.
