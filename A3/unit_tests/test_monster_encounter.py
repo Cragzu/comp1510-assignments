@@ -4,7 +4,7 @@ import unittest.mock
 import io
 
 
-class TestMonsterEncounter(TestCase):  # todo: case for player dying
+class TestMonsterEncounter(TestCase):
 
     @unittest.mock.patch('sys.stdout', new_callable=io.StringIO)
     @unittest.mock.patch('random.randint', return_value=3)
