@@ -28,15 +28,29 @@ def calculate_calories():
     """
     Calculate the total calories and average calories per item in the global dict const.
 
+    :precondition: all values in global _calories are ints
     :return: none, uses print statements
     """
     total_calories = 0
 
     for item in _calories:
-        total_calories += _calories[item]
+        total_calories += _calories[item]  # this should always be int as exception was caught in update_dict
 
     avg_calories = total_calories / len(_calories)
     print("Total Calories:", total_calories, "Average Calories: %0.1f\n" % avg_calories)
+
+
+def display_keys():
+    """
+    Display all the keys in the global dict const as sorted list items.
+
+    Creates a list of every key in the dict, sorts it alphabetically, and prints it.
+
+    :return: none, uses print statement
+    """
+    food_item_names = [item for item in _calories]  # refactored to use list comprehension
+
+    print("Food Items:", sorted(food_item_names))
 
 
 def main():
@@ -51,10 +65,7 @@ def main():
 
     while new_item != "q":
         update_dict(new_item)
-
-        food_item_names = [item for item in _calories]  # refactored to use list comprehension
-
-        print("Food Items:", sorted(food_item_names))
+        display_keys()
         calculate_calories()
 
         new_item = input("Enter food item to add, or ’q’ to exit: ")
