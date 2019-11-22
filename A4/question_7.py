@@ -24,6 +24,21 @@ def update_dict(item: str):
         print('Calories must be a number!')
 
 
+def calculate_calories():
+    """
+    Calculate the total calories and average calories per item in the global dict const.
+
+    :return: none, uses print statements
+    """
+    total_calories = 0
+
+    for item in _calories:
+        total_calories += _calories[item]
+
+    avg_calories = total_calories / len(_calories)
+    print("Total Calories:", total_calories, "Average Calories: %0.1f\n" % avg_calories)
+
+
 def main():
     """
     Drive the program.
@@ -31,23 +46,16 @@ def main():
     Showcases the function defined in this module.
     """
 
-
     # Input loop
     new_item = input("Enter food item to add, or ’q’ to exit: ")
 
     while new_item != "q":
         update_dict(new_item)
 
-        total_calories = 0
-
-        for item in _calories:
-            total_calories += _calories[item]
-
         food_item_names = [item for item in _calories]  # refactored to use list comprehension
 
-        avg_calories = total_calories / len(_calories)
-        print("\nFood Items:", sorted(food_item_names))
-        print("Total Calories:", total_calories, "Average Calories: %0.1f\n" % avg_calories)
+        print("Food Items:", sorted(food_item_names))
+        calculate_calories()
 
         new_item = input("Enter food item to add, or ’q’ to exit: ")
 
