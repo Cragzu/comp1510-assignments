@@ -16,17 +16,16 @@ def main():
 
     # Input loop
     new_item = input("Enter food item to add, or ’q’ to exit: ")
+
     while new_item != "q":
         new_item_calories = int(input("Enter calories for " + new_item + ": "))
         _calories[new_item] = new_item_calories
         total_calories = 0
 
         for item in _calories:
-            total_calories = total_calories + _calories[item]
+            total_calories += _calories[item]
 
-        food_item_names = []
-        for item in _calories:
-            food_item_names.append(item)
+        food_item_names = [item for item in _calories]  # refactored to use list comprehension
 
         avg_calories = total_calories / len(_calories)
         print("\nFood Items:", sorted(food_item_names))

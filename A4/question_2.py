@@ -3,7 +3,7 @@ Part 2 of 8: Module containing an algorithm for finding the greatest common divi
 """
 
 
-def gcd(a: int, b: int) -> int:  # todo: exception for improper argument (not a non-zero int)
+def gcd(a: int, b: int) -> int:
     """
     Determine the greatest common divisor of the two given ints a and b.
 
@@ -21,7 +21,11 @@ def gcd(a: int, b: int) -> int:  # todo: exception for improper argument (not a 
     if b == 0:  # check to break out of recursion
         return a  # the non-zero value; the GCD
 
-    return gcd(b, a % b)  # standard recursion, get remainder of a/b and continue with b and the remainder
+    try:
+        return gcd(b, a % b)  # standard recursion, get remainder of a/b and continue with b and the remainder
+
+    except TypeError:
+        print('The given argument was not int!')
 
 
 def main():
@@ -30,7 +34,7 @@ def main():
 
     Showcases the function defined in this module.
     """
-    print(gcd(-25, 15))
+    print(gcd('a', 15))
 
 
 if __name__ == "__main__":
