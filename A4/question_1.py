@@ -45,10 +45,12 @@ def eratosthenes(upperbound: int) -> list:
     >>>eratosthenes(30)
     [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
     """
-    if type(upperbound) is not int:  # todo: function for raising exceptions?
-        raise Exception('The given argument wasn\'t an int! The argument was: {}'.format(upperbound))
+    try:
+        range_list = list(range(2, upperbound))  # make a list of all numbers between 2 and upperbound, ignore 0 and 1
+    except TypeError:
+        print('The given upperbound was not an int!')
+        return
 
-    range_list = list(range(2, upperbound))  # make a list of all numbers between 2 and upperbound, ignore 0 and 1
     primes = range_list  # list to modify
 
     for index, value in enumerate(range_list):
@@ -68,7 +70,7 @@ def main():
 
     Showcases the function defined in this module.
     """
-    print(eratosthenes(30))
+    print(eratosthenes(-2))
 
 
 if __name__ == "__main__":
