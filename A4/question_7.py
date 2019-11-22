@@ -2,6 +2,26 @@
 Part 7 of 8: Module containing a refactor of an existing script that calculates calorie amounts.
 The script is reworked to be modular and atomic.
 """
+# Global Constant
+_calories = {"lettuce": 5, "carrot": 52, "apple": 72, "bread": 66, "pasta": 221, "rice": 225, "milk": 122,
+             "cheese": 115, "yogurt": 145, "beef": 240, "chicken": 140, "butter": 102}
+
+
+def update_dict(item: str):
+    """
+    Add a new user-given item to the dict constant.
+
+    Gets user's input for the value, then adds the new key-value pair to the dict.
+
+    :param item: str
+    :precondition: user input for calories must be convertible to int
+    :return: none, modifies the _calories dict constant.
+    """
+    try:
+        new_item_calories = int(input("Enter calories for " + item + ": "))
+        _calories[item] = new_item_calories
+    except ValueError:
+        print('Calories must be a number!')
 
 
 def main():
@@ -10,16 +30,14 @@ def main():
 
     Showcases the function defined in this module.
     """
-    # Global Constant
-    _calories = {"lettuce": 5, "carrot": 52, "apple": 72, "bread": 66, "pasta": 221, "rice": 225, "milk": 122,
-                 "cheese": 115, "yogurt": 145, "beef": 240, "chicken": 140, "butter": 102}
+
 
     # Input loop
     new_item = input("Enter food item to add, or ’q’ to exit: ")
 
     while new_item != "q":
-        new_item_calories = int(input("Enter calories for " + new_item + ": "))
-        _calories[new_item] = new_item_calories
+        update_dict(new_item)
+
         total_calories = 0
 
         for item in _calories:
