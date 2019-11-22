@@ -53,13 +53,14 @@ def display_keys():
     print("Food Items:", sorted(food_item_names))
 
 
-def main():
+def update_calories():
     """
-    Drive the program.
+    Add new key-value pairs to the global dict const through user input.
 
-    Showcases the function defined in this module.
+    Repeatedly prompts the user to enter a new item, ending when they enter 'q'. Adds the item to the dict with the
+    value (calorie amount) from input. Displays information about the current dict items.
+    :return: none
     """
-
     # Input loop
     new_item = input("Enter food item to add, or ’q’ to exit: ")
 
@@ -69,6 +70,15 @@ def main():
         calculate_calories()
 
         new_item = input("Enter food item to add, or ’q’ to exit: ")
+
+
+def main():
+    """
+    Drive the program.
+
+    Showcases the function defined in this module.
+    """
+    update_calories()
 
 
 if __name__ == "__main__":
