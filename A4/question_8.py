@@ -17,6 +17,9 @@ def find_highest_bars(lowerbound: int, upperbound: int, padding=None) -> list:
     :precondition: padding must be a number 0-9
     :precondition: lowerbound must be less than upperbound, they must both be ints
     :return: a list containing the number and its required number of bars
+
+    >>>find_highest_bars(1, 9)
+    ['8', 7]
     """
     # number: amount of bars
     amounts_of_bars = {'0': 6, '1': 2, '2': 5, '3': 5, '4': 4, '5': 5, '6': 6, '7': 3, '8': 7, '9': 6}
