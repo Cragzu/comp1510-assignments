@@ -34,7 +34,7 @@ def main():
 
     Showcases the function defined in this module.
     """
-    print(gcd('a', 15))
+    print(gcd(25, 15))
 
 
 if __name__ == "__main__":
