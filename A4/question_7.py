@@ -6,7 +6,7 @@ The script is reworked to be modular and atomic.
 
 def update_dict(item: str, document: dict) -> dict:
     """
-    Add a new user-given item to the dict constant.
+    Add a new user-given item to the given dict.
 
     Gets user's input for the value, then adds the new key-value pair to the dict.
 
@@ -26,8 +26,9 @@ def update_dict(item: str, document: dict) -> dict:
 
 def calculate_calories(document: dict):
     """
-    Calculate the total calories and average calories per item in the global dict const.
+    Calculate the total calories and average calories per item in the given dict.
 
+    :param document: dict
     :precondition: all values in global _calories are ints
     :return: none, uses print statements
     """
@@ -36,8 +37,13 @@ def calculate_calories(document: dict):
     for item in document:
         total_calories += document[item]  # this should always be int as exception was caught in update_dict
 
-    avg_calories = total_calories / len(document)
-    print("Total Calories:", total_calories, "Average Calories: %0.1f\n" % avg_calories)
+    try:
+        avg_calories = total_calories / len(document)
+    except ZeroDivisionError:
+        print('There were no items in the dictionary!')
+
+    else:
+        print("Total Calories:", total_calories, "Average Calories: %0.1f\n" % avg_calories)
 
 
 def display_keys(document: dict):
