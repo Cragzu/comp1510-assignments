@@ -3,7 +3,7 @@ Part 5 of 8: Module containing a function to sort amounts of money into denomina
 """
 
 
-def cash_money(amount: float) -> dict:  # todo: raise exception if amount is not positive double
+def cash_money(amount: float) -> dict:
     """
     Calculate the number of each type of bill and coin there is in a given amount of money.
 
@@ -22,9 +22,13 @@ def cash_money(amount: float) -> dict:  # todo: raise exception if amount is not
     breakdown = {100: 0, 50: 0, 20: 0, 5: 0, 2: 0, 1: 0, 0.25: 0, 0.10: 0, 0.05: 0, 0.01: 0}  # setup dict
 
     for key in breakdown.keys():  # loop through dict
-        denomination = int(amount // key)
-        breakdown[key] = denomination  # set value to amount of that denomination
-        amount -= denomination * key
+        try:
+            denomination = int(amount // key)
+        except TypeError:
+            print('Cannot divide by that argument!')
+        else:
+            breakdown[key] = denomination  # set value to amount of that denomination
+            amount -= denomination * key
 
     breakdown = {k: v for k, v in breakdown.items() if v != 0}  # remove empty keys
 
@@ -37,7 +41,7 @@ def main():
 
     Showcases the function defined in this module.
     """
-    print(cash_money(66.53))
+    print(cash_money('a'))
 
 
 if __name__ == "__main__":
