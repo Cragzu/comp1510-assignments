@@ -20,8 +20,6 @@ def selection_sort(list_to_sort: list) -> list:
     >>>selection_sort([3, 5, 1, 9, -4])
     [-4, 3, 1, 5, 9]
     """
-    if not list_to_sort:  # todo: raising error for list of unsortable items, use slices as in q1?
-        raise Exception('The list doesn\'t contain sortable items! The given list was: {}'.format(list_to_sort))
 
     for unsorted_section in range(len(list_to_sort)):  # repeat as many times as the vector length
 
@@ -31,8 +29,11 @@ def selection_sort(list_to_sort: list) -> list:
             if list_to_sort[i] < list_to_sort[smallest_index]:  # check each item against smallest
                 smallest_index = i  # update smallest index
 
-        list_to_sort[unsorted_section], list_to_sort[smallest_index] = \
-            list_to_sort[smallest_index], list_to_sort[unsorted_section]  # swap first index of unsorted with smallest
+        try:
+            list_to_sort[unsorted_section], list_to_sort[smallest_index] = \
+                list_to_sort[smallest_index], list_to_sort[unsorted_section]  # swap first index of unsorted & smallest
+        except TypeError:
+            print('The given argument is not a sortable list!')
 
     return list_to_sort
 
