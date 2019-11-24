@@ -12,9 +12,8 @@ class TestCashMoney(TestCase):
     def test_empty(self):
         self.assertEqual(cash_money(0.0), {})
 
-    @unittest.mock.patch('builtins.input', return_value='a')
     @unittest.mock.patch('sys.stdout', new_callable=io.StringIO)
-    def test_invalid_argument(self, mock_stdout, mock_input):
+    def test_invalid_argument(self, mock_stdout):
         expected_output = 'Cannot divide by that argument!\n'
         for i in ['a', 0]:
             cash_money(i)
