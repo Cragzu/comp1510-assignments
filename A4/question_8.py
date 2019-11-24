@@ -32,9 +32,8 @@ def find_highest_bars(lowerbound: int, upperbound: int, padding=None) -> list:
 
         num_string = str(number)
 
-        if padding:  # pad with leading number if given
-            if len(num_string) == 1:
-                num_string = padding + num_string
+        if padding and len(num_string) == 1:  # pad single-digit numbers with leading number if given
+            num_string = padding + num_string
 
         for digit in num_string:
             current_amount += amounts_of_bars[digit]
