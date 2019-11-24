@@ -24,8 +24,9 @@ def cash_money(amount: float) -> dict:
     for key in breakdown.keys():  # loop through dict
         try:
             denomination = int(amount // key)
-        except TypeError:
+        except (TypeError, ZeroDivisionError) as error:
             print('Cannot divide by that argument!')
+            return
         else:
             breakdown[key] = denomination  # set value to amount of that denomination
             amount -= denomination * key

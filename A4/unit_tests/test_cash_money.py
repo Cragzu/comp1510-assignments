@@ -1,5 +1,7 @@
 from unittest import TestCase
 from question_5 import cash_money
+import io
+import unittest.mock
 
 
 class TestCashMoney(TestCase):
@@ -10,5 +12,10 @@ class TestCashMoney(TestCase):
     def test_empty(self):
         self.assertEqual(cash_money(0.0), {})
 
-    # def test_invalid_argument(self):  # todo: enable when raising exception is implemented
-    #     self.assertRaises(Exception, cash_money, 'a')
+    @unittest.mock.patch('builtins.input', return_value='a')
+    @unittest.mock.patch('sys.stdout', new_callable=io.StringIO)
+    def test_invalid_argument(self, mock_stdout, mock_input):
+        expected_output = 'Cannot divide by that argument!\n'
+        for i in ['a', 0]:
+            cash_money(i)
+            self.assertEqual(mock_stdout.getvalue(), expected_output)
