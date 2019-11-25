@@ -20,6 +20,7 @@ def cash_money(amount: float) -> dict:
     {50: 1, 5: 3, 1: 1, 0.25: 2, 0.01: 3}
     """
     breakdown = {100: 0, 50: 0, 20: 0, 5: 0, 2: 0, 1: 0, 0.25: 0, 0.10: 0, 0.05: 0, 0.01: 0}  # setup dict
+    amount = round(amount, 2)  # round to 2 decimal places
 
     for key in breakdown.keys():  # loop through dict
         try:
@@ -42,7 +43,7 @@ def main():
 
     Showcases the function defined in this module.
     """
-    print(cash_money('a'))
+    print(cash_money(44.333333))
 
 
 if __name__ == "__main__":

@@ -17,6 +17,6 @@ class TestGcd(TestCase):
 
     @unittest.mock.patch('sys.stdout', new_callable=io.StringIO)
     def test_invalid_arguments(self, mock_stdout):
-        expected_output = 'The given argument was not int!\n'
+        expected_output = 'Cannot divide by that argument!\n'
         gcd('a', 'b')
         self.assertEqual(mock_stdout.getvalue(), expected_output)

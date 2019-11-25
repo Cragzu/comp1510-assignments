@@ -24,8 +24,8 @@ def gcd(a: int, b: int) -> int:
     try:
         return gcd(b, a % b)  # standard recursion, get remainder of a/b and continue with b and the remainder
 
-    except TypeError:
-        print('The given argument was not int!')
+    except (TypeError, ZeroDivisionError):
+        print('Cannot divide by that argument!')
 
 
 def main():
